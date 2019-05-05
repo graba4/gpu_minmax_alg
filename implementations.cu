@@ -1,3 +1,4 @@
+#include <deque>
 #include "implementations.h"
 #include "io.h"
 #include <stdio.h>
@@ -54,5 +55,51 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 } 
 
 __global__ void naive_aproach_one_thread(cuda_matrix *matrix){
-	//missing!
+	int tid = threadIdx.x,
+		block_id = gridDim.x;
+	deque<int> U, L;
+	u_int w = matrix->window_size;
+	double *a = matrix->d_matrix,
+		   *maxval = matrix->d_maxval,
+		   *minval = matrix->d_minval;
+
+	if (tid == 0 && block_id == 0) //only one thread
+	{
+		for(u_int i=1; i < matrix->arrlen; ++i){
+			if(i >= w){
+				maxval[i−w] = a[U.size() > 0 ? U.front():i−1];
+				minval[i−w] = a[L.size() > 0 ? L.front():i−1];
+			}
+
+			if(a[i] > a[i−1]){
+				L.pushback(i−1);
+				if(i == w + L.front())
+					L.popfront();
+
+				while(U.size() > 0){
+					if(a[i] <= a[U.back()]){
+						if(i == w + U.front())
+							U.popfront();
+						break;
+					}
+					U.popback();
+				}
+			}else{
+				U.pushback(i−1);
+				if(i == w + U.front())
+					U.popfront();
+				
+				while(L.size() > 0){
+					if(a[i] >= a[L.back()]){
+						if(i == w + L.front())
+							L.popfront();
+						break;
+					}
+					L.popback();
+				}
+			}else
+		}
+		maxval[matrix->arrlen − w] = a[U.size() > 0 ? U.front() : matrix->arrlen−1];
+		minval[matrix->arrlen − w] = a[L.size() > 0 ? L.front() : matrix->arrlen−1];
+	}
 }

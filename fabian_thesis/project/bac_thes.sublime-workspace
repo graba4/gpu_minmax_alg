@@ -1,0 +1,1398 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"star",
+				"start"
+			],
+			[
+				"prin",
+				"print"
+			],
+			[
+				"pri",
+				"print"
+			],
+			[
+				"d_",
+				"d_matrix"
+			],
+			[
+				"t",
+				"tp\ttemplate <typename ${1:_InputIter}>"
+			],
+			[
+				"for",
+				"forin\tfor … in … done"
+			],
+			[
+				"temp",
+				"b_temp"
+			],
+			[
+				"block",
+				"block_size"
+			],
+			[
+				"blo",
+				"blockIdx"
+			],
+			[
+				"lock",
+				"locks"
+			],
+			[
+				"lo",
+				"locks_h"
+			],
+			[
+				"c",
+				"cmem\tcudaMemcpy"
+			],
+			[
+				"tid",
+				"tid_temp"
+			],
+			[
+				"bloc",
+				"block_size"
+			],
+			[
+				"thre",
+				"threads"
+			],
+			[
+				"__",
+				"__s\t__syncthreads()"
+			],
+			[
+				"f",
+				"fprintf\tfprintf …"
+			],
+			[
+				"opt",
+				"optarg"
+			],
+			[
+				"bo",
+				"blockIdx"
+			],
+			[
+				"_",
+				"__global__"
+			],
+			[
+				"nai",
+				"naive_aproach"
+			],
+			[
+				"err",
+				"errors"
+			],
+			[
+				"pr",
+				"printf\tprintf …"
+			],
+			[
+				"b",
+				"block"
+			],
+			[
+				"thr",
+				"threadIdx"
+			],
+			[
+				"var",
+				"var_count"
+			],
+			[
+				"tid_",
+				"tid_temp"
+			],
+			[
+				"max",
+				"max_threads"
+			],
+			[
+				"DEV",
+				"DEV_ID"
+			],
+			[
+				"na",
+				"naive_aproach_single_cuda"
+			],
+			[
+				"p",
+				"printf\tprintf …"
+			],
+			[
+				"cuda",
+				"cuda_matrix"
+			],
+			[
+				"te",
+				"temp_p"
+			],
+			[
+				"d",
+				"d_matrix"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"er",
+				"error"
+			],
+			[
+				"print",
+				"print_matrix"
+			],
+			[
+				"fre",
+				"free"
+			],
+			[
+				"re",
+				"resources"
+			],
+			[
+				"check",
+				"checkCudaErrors"
+			],
+			[
+				"che",
+				"checkCudaErrors"
+			],
+			[
+				"si",
+				"size_t"
+			],
+			[
+				"de",
+				"dev"
+			],
+			[
+				"div",
+				"divide"
+			],
+			[
+				"du",
+				"durations"
+			],
+			[
+				"ma",
+				"matrix"
+			],
+			[
+				"free",
+				"free_matrix"
+			],
+			[
+				"rev",
+				"revisions"
+			],
+			[
+				"revi",
+				"revisions_opt"
+			],
+			[
+				"usage",
+				"usage_str"
+			],
+			[
+				"usag",
+				"usage_str"
+			],
+			[
+				"usa",
+				"usage"
+			],
+			[
+				"NV",
+				"NVCCFLAGS"
+			],
+			[
+				"str",
+				"STRLEN"
+			],
+			[
+				"in",
+				"inc\t#include <…>"
+			],
+			[
+				"host",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"Hos",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"u",
+				"usage_msg"
+			],
+			[
+				"Ho",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"io_",
+				"io_info"
+			],
+			[
+				"i_o",
+				"i_info"
+			],
+			[
+				"erro",
+				"error_exit"
+			],
+			[
+				"inc",
+				"inc\t#include \"…\""
+			],
+			[
+				"io",
+				"io_info"
+			],
+			[
+				"st",
+				"struct\tstruct"
+			],
+			[
+				"cm",
+				"cmalmng\tcudaMallocManaged"
+			],
+			[
+				"supp",
+				"supp_list"
+			],
+			[
+				"pag",
+				"page"
+			],
+			[
+				"ele",
+				"elem"
+			],
+			[
+				"list",
+				"mapid_list"
+			],
+			[
+				"info",
+				"info"
+			],
+			[
+				"mapid",
+				"mapid_ref"
+			],
+			[
+				"map",
+				"mapid_t"
+			],
+			[
+				"get_",
+				"get_mapinfo"
+			],
+			[
+				"new",
+				"new_id"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"get",
+				"get_mapid"
+			],
+			[
+				"of",
+				"ofs"
+			],
+			[
+				"inf",
+				"mapid_info"
+			],
+			[
+				"mapi",
+				"mapid_t"
+			],
+			[
+				"page",
+				"pages"
+			],
+			[
+				"bytes",
+				"bytes_written"
+			],
+			[
+				"user",
+				"user_buffer"
+			],
+			[
+				"sys",
+				"syscall_mmap"
+			],
+			[
+				"syscall_m",
+				"syscall_mmap"
+			],
+			[
+				"syscall_mm",
+				"syscall_munmap"
+			],
+			[
+				"don",
+				"donation_list"
+			],
+			[
+				"curr",
+				"thread_current"
+			],
+			[
+				"thread",
+				"thread_current"
+			],
+			[
+				"read",
+				"ready_list"
+			],
+			[
+				"stack",
+				"stack_rev"
+			],
+			[
+				"stck",
+				"stack_start"
+			],
+			[
+				"kpa",
+				"kpage_end"
+			],
+			[
+				"threa",
+				"thread_ticks"
+			],
+			[
+				"int",
+				"int64_t"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"file_",
+				"file_name"
+			],
+			[
+				"argc",
+				"arg_cnt"
+			],
+			[
+				"arg",
+				"argv"
+			],
+			[
+				"au",
+				"start_aux_data"
+			],
+			[
+				"aux",
+				"aux_data"
+			],
+			[
+				"start",
+				"start_aux_data"
+			],
+			[
+				"tick",
+				"tick_less_func"
+			],
+			[
+				"intr",
+				"intr_get_level"
+			],
+			[
+				"TA",
+				"TASK_DIR"
+			],
+			[
+				"swit",
+				"switch_impl"
+			],
+			[
+				"tim",
+				"time_start"
+			],
+			[
+				"MPI_w",
+				"MPI_Wtime"
+			],
+			[
+				"time",
+				"time_stop"
+			],
+			[
+				"dou",
+				"double"
+			],
+			[
+				"null",
+				"MPI_PROC_NULL"
+			],
+			[
+				"neig",
+				"neighbours"
+			],
+			[
+				"win",
+				"win_data"
+			],
+			[
+				"siz",
+				"size"
+			],
+			[
+				"doub",
+				"MPI_DOUBLE"
+			],
+			[
+				"coun",
+				"count"
+			],
+			[
+				"stat",
+				"MPI_Status"
+			],
+			[
+				"nei",
+				"neighbours"
+			],
+			[
+				"wind",
+				"windows"
+			],
+			[
+				"data",
+				"data_read"
+			],
+			[
+				"MPI_Senc",
+				"MPI_Stencil_window"
+			],
+			[
+				"type",
+				"typedef"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"im",
+				"image"
+			],
+			[
+				"cou",
+				"count"
+			],
+			[
+				"fill",
+				"fill_image"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "lin-sys-solv.cpp",
+			"settings":
+			{
+				"buffer_size": 2201,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "benchmark.sh",
+			"settings":
+			{
+				"buffer_size": 1280,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "implementations.cu",
+			"settings":
+			{
+				"buffer_size": 16033,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vutinfth/cuda.tex",
+			"settings":
+			{
+				"buffer_size": 91449,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "implementations.h",
+			"settings":
+			{
+				"buffer_size": 341,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "io.cpp",
+			"settings":
+			{
+				"buffer_size": 3113,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "io.h",
+			"settings":
+			{
+				"buffer_size": 272,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources.h",
+			"settings":
+			{
+				"buffer_size": 363,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources.cu",
+			"settings":
+			{
+				"buffer_size": 3930,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1173,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"Bookmarks: Toggle"
+			],
+			[
+				"book",
+				"Bookmarks: Toggle"
+			],
+			[
+				"dic",
+				"Dictionaries: Set Language"
+			],
+			[
+				"make",
+				"Set Syntax: Makefile"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 174.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Y/bak-arbeit/project",
+		"/Y/bak-arbeit/project/vutinfth"
+	],
+	"file_history":
+	[
+		"/C/Users/fabia/Desktop/Suchtbaum.java",
+		"/Y/bak-arbeit/project/cuda_schedule.h",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.cpp",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.h",
+		"/home/fabian/dokumente/bak-arbeit/project/results.csv",
+		"/home/fabian/dokumente/progos/pintos-progos/userprog/syscall.c",
+		"/home/fabian/dokumente/bak-arbeit/project/CUDA error at implementations.cu",
+		"/home/fabian/dokumente/bak-arbeit/project/Lock.h",
+		"/home/fabian/dokumente/bak-arbeit/project/io.h",
+		"/home/fabian/dokumente/betriebssysteme/1a/mydiff.c",
+		"/home/fabian/dokumente/bak-arbeit/project/results.txt",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations_cpu.cpp",
+		"/home/fabian/dokumente/betriebssysteme/1a/ispalindrom.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations_cpu.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_cuda.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_functions.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/timer.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_image.h",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/0_Simple/simplePrintf/simplePrintf.cu",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.cu.old",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/0_Simple/simplePrintf/Makefile",
+		"/home/fabian/dokumente/bak-arbeit/project/inc/helper_functions.h",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.c",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.cpp",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.c",
+		"/home/fabian/dokumente/bak-arbeit/project/io.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/image.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.cu",
+		"/usr/local/cuda-8.0/targets/x86_64-linux/include/host_defines.h",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.c",
+		"/usr/local/cuda-8.0/targets/x86_64-linux/include/fatbinary.h",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/5_Simulations/nbody/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/websh.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementaions.cu",
+		"/home/fabian/dokumente/betriebssysteme/2/schedule.c",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.cu",
+		"/home/fabian/dokumente/betriebssysteme/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/3/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/2/rshutdown.c",
+		"/home/fabian/dokumente/bak-arbeit/project/bac_thes.sublime-project",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/hash.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/user/syscall.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/diff.txt",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/page.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/process.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/thread.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/DESIGNDOC",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/pagedir.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/syscall.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/page.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/thread.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/process.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/synch.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/palloc.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/exception.c",
+		"/home/fabian/dokumente/progos/pintos-progos/devices/timer.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/filesys/file.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/syscall-nr.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/user/syscall.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/syscall.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/synch.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/bitmap.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/interrupt.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/DESIGNDOC",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/tests/intro/alarm-clock/alarm-simultaneous.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/devices/timer.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/Makefile.kernel",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/intro/Makefile",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/Makefile.build",
+		"/home/fabian/dokumente/progos/pintos-progos/intro/build/Makefile",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/thread.c",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/thread.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/vaddr.h",
+		"/home/fabian/dokumente/progos/pintos-progos/userprog/process.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/synch.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/bitmap.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/hash.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/list.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/list.c",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/stdio.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/interrupt.h",
+		"/home/fabian/dokumente/progos/pintos-progos/intro/DESIGNDOC",
+		"/home/fabian/dokumente/progos/pintos-progos/Makefile",
+		"/home/fabian/dokumente/progos/pintos-progos/intro/bochsrc.txt",
+		"/home/fabian/dokumente/progos/pintos-progos/userprog/process.c",
+		"/home/fabian/dokumente/progos/pintos-progos/examples/hex-dump.c",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/round.h",
+		"/home/fabian/dokumente/progos/pintos-progos/devices/timer.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/init.c",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/console.h",
+		"/home/fabian/dokumente/progos/pintos-progos/tests/intro/alarm-clock/alarm-zero.c",
+		"/home/fabian/dokumente/progos/pintos-progos/tests/intro/alarm-clock/alarm-wait.c",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/interrupt.c",
+		"/home/fabian/dokumente/devices/timer.c",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/console.c",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/loader.h",
+		"/home/fabian/dokumente/progos/pintos-progos/Makefile.userprog",
+		"/home/fabian/dokumente/progos/pintos-progos/Makefile.build",
+		"/home/fabian/dokumente/progos/pintos-progos/Make.config",
+		"/home/fabian/dokumente/progos/pintos-progos/tests/threads/alarm-wait.c",
+		"/home/fabian/dokumente/microcontroller/uebung/2.2/Makefile",
+		"/home/fabian/dokumente/microcontroller/uebung/02-demo_assembler/demo.s",
+		"/home/fabian/dokumente/microcontroller/uebung/03-demo_asm_makefile/demo.s",
+		"/home/fabian/dokumente/microcontroller/uebung/2.2/m1280def.inc",
+		"/home/fabian/dokumente/microcontroller/uebung/2.2/2_2.s",
+		"/home/fabian/dokumente/parcomp/pcrepo/stencil_op.h",
+		"/home/fabian/dokumente/parcomp/pcrepo/stencil_op.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/image.h",
+		"/home/fabian/dokumente/parcomp/pcrepo/mpi.c.old",
+		"/home/fabian/dokumente/parcomp/pcrepo/Makefile",
+		"/home/fabian/dokumente/parcomp/pcrepo/mpi.c",
+		"/home/fabian/dokumente/betriebssysteme/uebung/ue.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/pthreads_benchmark.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/pthreads.c",
+		"/home/fabian/dokumente/betriebssysteme/uebung/Makefile",
+		"/home/fabian/dokumente/parcomp/pcrepo/stringlist.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/stringlist.h",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/battleships-client.c",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/battleships-server.c",
+		"/home/fabian/dokumente/betriebssysteme/uebung/1.c",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/test.c",
+		"/home/fabian/dokumente/betriebssysteme/3/hangman_client.c",
+		"/home/fabian/dokumente/betriebssysteme/3/hangman_server.c",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/doc/Doxyfile",
+		"/home/fabian/dokumente/betriebssysteme/uebung/server.c"
+	],
+	"find":
+	{
+		"height": 45.0
+	},
+	"find_in_files":
+	{
+		"height": 100.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"memoir",
+			"multirow",
+			"import{",
+			"import",
+			"input",
+			"listoffig",
+			"listo",
+			"3",
+			"3000",
+			"2500",
+			"2000",
+			"1500",
+			"1000",
+			"i",
+			"naive_aproach_divide_n_merch_cuda_new",
+			"devide",
+			"t_opt",
+			"-r",
+			"-i",
+			"results.csv",
+			"blocks",
+			"SYMBOL",
+			"-i",
+			"Lock *lock",
+			"sem",
+			"Special_lock",
+			"Semaphore",
+			"Lock",
+			"locks",
+			"cuda",
+			"blocks",
+			"0",
+			"9",
+			"8",
+			"7",
+			"6",
+			"5",
+			" ",
+			"SYMBOL",
+			"block_inc",
+			"threadIdx",
+			"sum",
+			"tid",
+			"[i]",
+			"i",
+			"naive_aproach_devide_n_merch_cuda",
+			"i",
+			"5000,",
+			"5000",
+			",1",
+			"-c",
+			"4",
+			"i",
+			"txt",
+			">>",
+			"usage",
+			"int",
+			"LockMulti",
+			"-c",
+			"2",
+			"result",
+			"gridDim.x",
+			"X",
+			"assert",
+			"var_count",
+			"tid",
+			"x",
+			"calc_solutions",
+			"tid",
+			"line",
+			"var_count",
+			"blockIdx.x",
+			"38",
+			"50",
+			"divide",
+			"calc_solutions",
+			"90",
+			"80",
+			"38",
+			"80",
+			"1",
+			"naive_aproach_cuda",
+			"pitch",
+			"d_matrix",
+			"calc_solutions",
+			"pitch",
+			"d_matrix",
+			"380",
+			"4",
+			"check_solutions",
+			"divide_multi",
+			"x",
+			"divide_multi",
+			".",
+			"SYMBOL",
+			"x",
+			"print_matrix",
+			"35",
+			"free_matrix",
+			"cudaFree",
+			"gen_reference",
+			"d_reference",
+			"void gen_reference(double *d_ref",
+			"__device__ void print",
+			"gen_reference",
+			"bool check_solu",
+			"vars",
+			"error",
+			"naive_aproach_single_cuda",
+			"j*i",
+			"gen_reference(double *d_refere",
+			"free_matrix",
+			"ee_matrix(double **matr",
+			"var_count",
+			"[i]",
+			"int_matrix(double **matrix, in",
+			"+1",
+			"var_cnt+1",
+			"row[i]",
+			"vars",
+			"matrix",
+			"gen_reference",
+			"cuda_matrix",
+			"matrix",
+			"cuda_matrix",
+			"trix(cuda_m",
+			"oid print_",
+			"matrix[j]"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "lin-sys-solv.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2201,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1270,
+								1270
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 996.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "benchmark.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1280,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "implementations.cu",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16033,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5416,
+								5416
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CUDA C++/cuda-c++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "vutinfth/cuda.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 91449,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1450,
+								1450
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 792.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "implementations.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 341,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								264,
+								264
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CUDA C++/cuda-c++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "io.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								199,
+								199
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 336.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "io.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								106,
+								106
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "resources.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								244,
+								244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "resources.cu",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3930,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1084,
+								1084
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CUDA C++/cuda-c++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 852.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 9,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1173,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								514,
+								514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 252.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 33.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.612477607791,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.612847942592,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 175.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"project": "bac_thes.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

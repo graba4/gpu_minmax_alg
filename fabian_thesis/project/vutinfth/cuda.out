@@ -1,0 +1,28 @@
+\BOOKMARK [0][-]{chapter*.3}{Kurzfassung}{}% 1
+\BOOKMARK [0][-]{chapter*.4}{Abstract}{}% 2
+\BOOKMARK [0][-]{section*.5}{Contents}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
+\BOOKMARK [0][-]{chapter.2}{Related Work}{}% 5
+\BOOKMARK [0][-]{chapter.3}{State Of The Art: The GPU Architecture}{}% 6
+\BOOKMARK [1][-]{section.3.1}{The GPU Architecture}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.2}{The CUDA Architecture}{chapter.3}% 8
+\BOOKMARK [0][-]{chapter.4}{Solving Linear Equations with CUDA}{}% 9
+\BOOKMARK [1][-]{section.4.1}{Gaussian Elimination In General}{chapter.4}% 10
+\BOOKMARK [1][-]{section.4.2}{Attempt To Parallelize The Problem}{chapter.4}% 11
+\BOOKMARK [1][-]{section.4.3}{Parallelization with CUDA}{chapter.4}% 12
+\BOOKMARK [0][-]{chapter.5}{Methodology For Benchmarking/Verifying The Algorithm}{}% 13
+\BOOKMARK [1][-]{section.5.1}{Hardware For Testing}{chapter.5}% 14
+\BOOKMARK [1][-]{section.5.2}{Methodology For Testing}{chapter.5}% 15
+\BOOKMARK [1][-]{section.5.3}{Verifying The Results}{chapter.5}% 16
+\BOOKMARK [0][-]{chapter.6}{Results}{}% 17
+\BOOKMARK [1][-]{section.6.1}{Sequential Performance}{chapter.6}% 18
+\BOOKMARK [1][-]{section.6.2}{Thread Performance of one SM}{chapter.6}% 19
+\BOOKMARK [1][-]{section.6.3}{Parallel Block Implementations}{chapter.6}% 20
+\BOOKMARK [1][-]{section.6.4}{Comparison With The Maxwell Architecture}{chapter.6}% 21
+\BOOKMARK [1][-]{section.6.5}{Comparison between CPU and GPU}{chapter.6}% 22
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 23
+\BOOKMARK [0][-]{chapter.8}{Appendix: Source Code}{}% 24
+\BOOKMARK [0][-]{section*.37}{List of Figures}{}% 25
+\BOOKMARK [0][-]{section*.38}{List of Tables}{}% 26
+\BOOKMARK [0][-]{chapter*.39}{List of Algorithms}{}% 27
+\BOOKMARK [0][-]{section*.41}{Bibliography}{}% 28

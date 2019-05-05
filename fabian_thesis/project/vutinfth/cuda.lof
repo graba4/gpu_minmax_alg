@@ -1,0 +1,35 @@
+\select@language {naustrian}
+\select@language {naustrian}
+\select@language {english}
+\select@language {naustrian}
+\select@language {english}
+\select@language {naustrian}
+\select@language {naustrian}
+\addvspace {10pt}
+\select@language {naustrian}
+\select@language {english}
+\addvspace {10pt}
+\select@language {naustrian}
+\select@language {english}
+\addvspace {10pt}
+\addvspace {10pt}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces A simple s draft of a SM Source: \cite {Introduction-to-GPUs}\relax }}{5}{figure.caption.7}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Comparison between CPU and GPU\relax }}{6}{figure.caption.6}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Block diagram of a SMX (Streaming Multiprocessor). Cudacores are divided into Warps which get executed by the Warp Scheduler. The cores inside of the SMX can access the Shared Memory, Read-Only Cache and the Texture Memory. Source: \cite {nvidia_kepler_2012}\relax }}{8}{figure.caption.9}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Brief illustration of a Kernel function which launches threads inside blocks Source: \cite {toolkit}\relax }}{11}{figure.caption.14}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Illustration of Summation Reduction Source: \cite {stack:overflow_2014}\relax }}{16}{figure.caption.19}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Cyclic striped scheme distributed onto processors. Source: \cite {parmeth}\relax }}{19}{figure.caption.21}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Reciprocal value of elements in ~\ref {fig:impl_0and1_static_5500} and theoretical linear approximation. For calculating the elements we assumed that the limiting value $K$ should be $\sim $53.22. Each of the values were calculated according to: $r = \frac {1}{time-K}$\relax }}{24}{figure.caption.25}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Brief illustration of pipelined implementation of Back-Substitution Source: \cite {pipelinecomp}\relax }}{25}{figure.caption.27}
+\addvspace {10pt}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Sequential Gaussian algorithm with Intel(R) i5-4690 CPU @ 3.50GHz\relax }}{33}{figure.caption.30}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Speedup that can be achieved when using multiple threads inside one SM (Matrixsize 900)\relax }}{34}{figure.caption.31}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Impl 0 and 1 with variable matrix size\relax }}{35}{figure.caption.32}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Comparison of Impl 0 and 1 (execution time and speedup) with a constant matrix size of 5500\relax }}{35}{figure.caption.33}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Comparison of Impl 0 and 1 (execution time and speedup) with a constant matrix size(5500) using \textbf {impl 1}\relax }}{37}{figure.caption.35}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Direct comparison: CPU vs. GPU\relax }}{38}{figure.caption.36}
+\addvspace {10pt}
+\addvspace {10pt}

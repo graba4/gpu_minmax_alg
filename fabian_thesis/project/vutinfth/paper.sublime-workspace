@@ -1,0 +1,1182 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"re",
+				"\\ref"
+			],
+			[
+				"la",
+				"\\label"
+			],
+			[
+				"opt",
+				"opt_cnt"
+			],
+			[
+				"bloc",
+				"blocks"
+			],
+			[
+				"blo",
+				"blockIdx"
+			],
+			[
+				"block",
+				"block_inc"
+			],
+			[
+				"bo",
+				"blockIdx"
+			],
+			[
+				"_",
+				"__global__"
+			],
+			[
+				"nai",
+				"naive_aproach"
+			],
+			[
+				"err",
+				"errors"
+			],
+			[
+				"pr",
+				"printf\tprintf …"
+			],
+			[
+				"b",
+				"block"
+			],
+			[
+				"thre",
+				"threadIdx"
+			],
+			[
+				"__",
+				"__s\t__syncthreads()"
+			],
+			[
+				"thr",
+				"threadIdx"
+			],
+			[
+				"var",
+				"var_count"
+			],
+			[
+				"tid_",
+				"tid_temp"
+			],
+			[
+				"tid",
+				"tid_temp"
+			],
+			[
+				"max",
+				"max_threads"
+			],
+			[
+				"DEV",
+				"DEV_ID"
+			],
+			[
+				"na",
+				"naive_aproach_single_cuda"
+			],
+			[
+				"p",
+				"printf\tprintf …"
+			],
+			[
+				"d_",
+				"d_reference"
+			],
+			[
+				"cuda",
+				"cuda_matrix"
+			],
+			[
+				"prin",
+				"print_ref"
+			],
+			[
+				"temp",
+				"temp_p"
+			],
+			[
+				"te",
+				"temp_p"
+			],
+			[
+				"d",
+				"d_matrix"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"c",
+				"cmem\tcudaMemcpy"
+			],
+			[
+				"er",
+				"error"
+			],
+			[
+				"print",
+				"print_matrix"
+			],
+			[
+				"fre",
+				"free"
+			],
+			[
+				"check",
+				"checkCudaErrors"
+			],
+			[
+				"che",
+				"checkCudaErrors"
+			],
+			[
+				"si",
+				"size_t"
+			],
+			[
+				"de",
+				"dev"
+			],
+			[
+				"div",
+				"divide"
+			],
+			[
+				"du",
+				"durations"
+			],
+			[
+				"ma",
+				"matrix"
+			],
+			[
+				"free",
+				"free_matrix"
+			],
+			[
+				"rev",
+				"revisions"
+			],
+			[
+				"revi",
+				"revisions_opt"
+			],
+			[
+				"usage",
+				"usage_str"
+			],
+			[
+				"usag",
+				"usage_str"
+			],
+			[
+				"usa",
+				"usage"
+			],
+			[
+				"NV",
+				"NVCCFLAGS"
+			],
+			[
+				"str",
+				"STRLEN"
+			],
+			[
+				"in",
+				"inc\t#include <…>"
+			],
+			[
+				"host",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"Hos",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"u",
+				"usage_msg"
+			],
+			[
+				"Ho",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"io_",
+				"io_info"
+			],
+			[
+				"i_o",
+				"i_info"
+			],
+			[
+				"erro",
+				"error_exit"
+			],
+			[
+				"inc",
+				"inc\t#include \"…\""
+			],
+			[
+				"io",
+				"io_info"
+			],
+			[
+				"st",
+				"struct\tstruct"
+			],
+			[
+				"cm",
+				"cmalmng\tcudaMallocManaged"
+			],
+			[
+				"supp",
+				"supp_list"
+			],
+			[
+				"pag",
+				"page"
+			],
+			[
+				"ele",
+				"elem"
+			],
+			[
+				"list",
+				"mapid_list"
+			],
+			[
+				"info",
+				"info"
+			],
+			[
+				"mapid",
+				"mapid_ref"
+			],
+			[
+				"map",
+				"mapid_t"
+			],
+			[
+				"get_",
+				"get_mapinfo"
+			],
+			[
+				"new",
+				"new_id"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"get",
+				"get_mapid"
+			],
+			[
+				"of",
+				"ofs"
+			],
+			[
+				"inf",
+				"mapid_info"
+			],
+			[
+				"mapi",
+				"mapid_t"
+			],
+			[
+				"page",
+				"pages"
+			],
+			[
+				"bytes",
+				"bytes_written"
+			],
+			[
+				"user",
+				"user_buffer"
+			],
+			[
+				"sys",
+				"syscall_mmap"
+			],
+			[
+				"syscall_m",
+				"syscall_mmap"
+			],
+			[
+				"syscall_mm",
+				"syscall_munmap"
+			],
+			[
+				"don",
+				"donation_list"
+			],
+			[
+				"curr",
+				"thread_current"
+			],
+			[
+				"thread",
+				"thread_current"
+			],
+			[
+				"pri",
+				"priority"
+			],
+			[
+				"read",
+				"ready_list"
+			],
+			[
+				"stack",
+				"stack_rev"
+			],
+			[
+				"stck",
+				"stack_start"
+			],
+			[
+				"kpa",
+				"kpage_end"
+			],
+			[
+				"threa",
+				"thread_ticks"
+			],
+			[
+				"int",
+				"int64_t"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"file_",
+				"file_name"
+			],
+			[
+				"argc",
+				"arg_cnt"
+			],
+			[
+				"arg",
+				"argv"
+			],
+			[
+				"au",
+				"start_aux_data"
+			],
+			[
+				"aux",
+				"aux_data"
+			],
+			[
+				"start",
+				"start_aux_data"
+			],
+			[
+				"tick",
+				"tick_less_func"
+			],
+			[
+				"intr",
+				"intr_get_level"
+			],
+			[
+				"TA",
+				"TASK_DIR"
+			],
+			[
+				"swit",
+				"switch_impl"
+			],
+			[
+				"tim",
+				"time_start"
+			],
+			[
+				"MPI_w",
+				"MPI_Wtime"
+			],
+			[
+				"time",
+				"time_stop"
+			],
+			[
+				"dou",
+				"double"
+			],
+			[
+				"null",
+				"MPI_PROC_NULL"
+			],
+			[
+				"neig",
+				"neighbours"
+			],
+			[
+				"win",
+				"win_data"
+			],
+			[
+				"for",
+				"for\tFor Loop"
+			],
+			[
+				"siz",
+				"size"
+			],
+			[
+				"doub",
+				"MPI_DOUBLE"
+			],
+			[
+				"coun",
+				"count"
+			],
+			[
+				"stat",
+				"MPI_Status"
+			],
+			[
+				"nei",
+				"neighbours"
+			],
+			[
+				"wind",
+				"windows"
+			],
+			[
+				"data",
+				"data_read"
+			],
+			[
+				"MPI_Senc",
+				"MPI_Stencil_window"
+			],
+			[
+				"type",
+				"typedef"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"im",
+				"image"
+			],
+			[
+				"cou",
+				"count"
+			],
+			[
+				"fill",
+				"fill_image"
+			],
+			[
+				"hei",
+				"height_offset"
+			],
+			[
+				"heig",
+				"height_offset"
+			],
+			[
+				"widt",
+				"width_offset"
+			],
+			[
+				"img",
+				"img"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "cuda.tex",
+			"settings":
+			{
+				"buffer_size": 91445,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build-all.sh",
+			"settings":
+			{
+				"buffer_size": 753,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build-all.bat",
+			"settings":
+			{
+				"buffer_size": 822,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build-thesis.sh",
+			"settings":
+			{
+				"buffer_size": 560,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "open",
+		"selected_items":
+		[
+			[
+				"open",
+				"Open Terminal View - Bash"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Bookmarks: Toggle"
+			],
+			[
+				"book",
+				"Bookmarks: Toggle"
+			],
+			[
+				"dic",
+				"Dictionaries: Set Language"
+			],
+			[
+				"make",
+				"Set Syntax: Makefile"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 174.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/fabian/Dokumente/bak-arbeit/project/vutinfth/bibfile.bib",
+		"/home/fabian/Dokumente/bak-arbeit/project/vutinfth/graphs/cpu_bench.csv",
+		"/home/fabian/dokumente/project/vutinfth/graphs/cpu_bench.csv",
+		"/home/fabian/Schreibtisch/vutinfth/graphs/threads.csv",
+		"/home/fabian/.config/sublime-text-3/Packages/TerminalView/README.md",
+		"/home/fabian/Schreibtisch/vutinfth/build-thesis.bat",
+		"/home/fabian/Schreibtisch/vutinfth/graphs/cpu_bench.csv",
+		"/Y/process variation/cherry-Picking/wissarb_template.tex",
+		"/Y/bak-arbeit/project/resources.cu",
+		"/Y/bak-arbeit/project/implementations.cu",
+		"/Y/bak-arbeit/project/implementations_cpu.cpp",
+		"/Y/bak-arbeit/project/implementations.h",
+		"/Y/bak-arbeit/vutinfth/cuda.bbl",
+		"/Y/bak-arbeit/vutinfth/graphs/impl_0,1_static_5500.csv",
+		"/Y/bak-arbeit/vutinfth/graphs/impl_0_inc_size.csv",
+		"/Y/bak-arbeit/vutinfth/graphs/impl_1_inc_size.csv",
+		"/C/Users/fabia/Downloads/pp09.pdf",
+		"/Y/process variation/cherry-Picking/bibfile.bib",
+		"/Y/bak-arbeit/vutinfth/vutinfth.dtx",
+		"/C/Users/fabia/Desktop/New folder/wissarb_template.tex",
+		"/Y/bak-arbeit/vutinfth/graphs/cpu_vs_gpu_impl_1_inc_size.csv",
+		"/Y/bak-arbeit/vutinfth/graphs/gtx_980_impl_0,1_static_5500.csv",
+		"/C/Users/fabia/Desktop/New folder/IEEEtran.cls",
+		"/C/Users/fabia/Desktop/joinmarket-master/README.md",
+		"/C/Users/fabia/Desktop/distutils.cfg",
+		"/Y/bak-arbeit/project/cuda_schedule.h",
+		"/Y/bak-arbeit/vutinfth/build-thesis.bat",
+		"/Y/bak-arbeit/vutinfth/graphs/cpu_bench.csv",
+		"/Y/bak-arbeit/vutinfth/graphs/threads.csv",
+		"/Y/bak-arbeit/vutinfth/vutinfth.cls",
+		"/Y/bak-arbeit/project/resources.h",
+		"/Y/bak-arbeit/project/Lock.h",
+		"/Y/bak-arbeit/vutinfth/build-all.bat",
+		"/Y/bak-arbeit/vutinfth/cuda.log",
+		"/Y/bak-arbeit/vutinfth/intro.tex",
+		"/Y/bak-arbeit/vutinfth/example.tex",
+		"/Y/bak-arbeit/vutinfth/intro.bib",
+		"/C/Users/fabia/Documents/bak-arbeit/project/Makefile",
+		"/C/Users/fabia/Documents/bak-arbeit/project/resources.cu",
+		"/C/Users/fabia/Documents/bak-arbeit/project/resources.h",
+		"/C/Users/fabia/Documents/bak-arbeit/project/errors.cpp",
+		"/C/Users/fabia/Documents/bak-arbeit/project/errors.h",
+		"/C/Users/fabia/Documents/bak-arbeit/project/io.h",
+		"/C/Users/fabia/Documents/bak-arbeit/project/io.cpp",
+		"/C/Users/fabia/Documents/bak-arbeit/project/results.txt",
+		"/C/Users/fabia/Documents/bak-arbeit/project/benchmark.sh",
+		"/C/Users/fabia/Documents/bak-arbeit/project/implementations_cpu.cpp",
+		"/C/Users/fabia/Documents/bak-arbeit/project/implementations.cu",
+		"/C/Users/fabia/Documents/bak-arbeit/project/lin-sys-solv.cpp",
+		"/C/Users/fabia/Documents/bak-arbeit/project/implementations.h",
+		"/home/fabian/dokumente/betriebssysteme/1a/mydiff.c",
+		"/home/fabian/dokumente/betriebssysteme/1a/ispalindrom.c",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.cpp",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations_cpu.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_cuda.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_functions.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/timer.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_image.h",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/0_Simple/simplePrintf/simplePrintf.cu",
+		"/home/fabian/dokumente/bak-arbeit/project/CUDA error at implementations.cu",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.cu.old",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/0_Simple/simplePrintf/Makefile",
+		"/home/fabian/dokumente/bak-arbeit/project/inc/helper_functions.h",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.c",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.cpp",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.c",
+		"/home/fabian/dokumente/bak-arbeit/project/io.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/image.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.cu",
+		"/usr/local/cuda-8.0/targets/x86_64-linux/include/host_defines.h",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.c",
+		"/usr/local/cuda-8.0/targets/x86_64-linux/include/fatbinary.h",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/5_Simulations/nbody/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/websh.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementaions.cu",
+		"/home/fabian/dokumente/betriebssysteme/2/schedule.c",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.cu",
+		"/home/fabian/dokumente/betriebssysteme/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/3/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/2/rshutdown.c",
+		"/home/fabian/dokumente/bak-arbeit/project/bac_thes.sublime-project",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/hash.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/user/syscall.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/diff.txt",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/page.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/process.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/thread.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/DESIGNDOC",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/pagedir.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/syscall.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/page.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/thread.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/process.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/synch.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/palloc.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/exception.c",
+		"/home/fabian/dokumente/progos/pintos-progos/devices/timer.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/filesys/file.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/syscall-nr.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/user/syscall.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/syscall.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/synch.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/bitmap.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/interrupt.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/threads/DESIGNDOC",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/tests/intro/alarm-clock/alarm-simultaneous.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/devices/timer.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/Makefile.kernel",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/intro/Makefile",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/Makefile.build",
+		"/home/fabian/dokumente/progos/pintos-progos/intro/build/Makefile",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/thread.c",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/thread.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/vaddr.h",
+		"/home/fabian/dokumente/progos/pintos-progos/userprog/process.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/synch.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/bitmap.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/hash.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/list.h",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/list.c",
+		"/home/fabian/dokumente/progos/pintos-progos/lib/kernel/stdio.h",
+		"/home/fabian/dokumente/progos/pintos-progos/threads/interrupt.h",
+		"/home/fabian/dokumente/progos/pintos-progos/intro/DESIGNDOC",
+		"/home/fabian/dokumente/progos/pintos-progos/Makefile",
+		"/home/fabian/dokumente/progos/pintos-progos/intro/bochsrc.txt"
+	],
+	"find":
+	{
+		"height": 49.0
+	},
+	"find_in_files":
+	{
+		"height": 100.0,
+		"where_history":
+		[
+			"Y:\\bak-arbeit\\vutinfth",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"nner",
+			"j\\\"(",
+			"jä",
+			"groupplot",
+			"fig:impl_0,1_static_5500",
+			"blockarray",
+			"scriptscriptstyle",
+			"math",
+			"asmath",
+			"festl",
+			"new",
+			"were",
+			"calcula",
+			"this is",
+			"cuda",
+			"CUDA",
+			"svg",
+			"raub",
+			"ref{",
+			"ref",
+			"project",
+			"square",
+			"app",
+			"zero",
+			"contain ",
+			"not all",
+			"zero",
+			"double",
+			"constant mem",
+			"acute",
+			"equation after",
+			"threadblocks",
+			"Threadblocks",
+			"methodology_",
+			"\\ref",
+			"methodology_for_testing",
+			"\\ref",
+			"Thread Performance of o",
+			"Thread Performance of one SM",
+			"\\ref",
+			"todo",
+			"$x$",
+			"vector",
+			" \n",
+			"vector",
+			"todo",
+			"gpu ",
+			"Results",
+			"results",
+			"weather",
+			"vector",
+			"limitations",
+			"subsub",
+			"vect",
+			"{",
+			"limitations",
+			"subsubsection",
+			"\\text{",
+			"text",
+			"scriptscriptstyle",
+			"\\scrip",
+			"scriptscriptstyle",
+			"pmatrix",
+			"scriptscriptstyle",
+			"pmatrix",
+			" ",
+			"pmatrix",
+			"\\\\",
+			"syncthreads",
+			"new_",
+			"itemize",
+			"linsting",
+			"linstine",
+			"algori",
+			"example",
+			"device",
+			"Device",
+			".\\\\\n",
+			"Bus",
+			"BUS",
+			"Bus",
+			"BUS",
+			"Bus",
+			"bus",
+			"BUS",
+			"addplot",
+			"apendix",
+			"both books wer",
+			"todo",
+			"Block",
+			"block",
+			"cuda",
+			"\\cite",
+			"todo",
+			"%",
+			"to this date",
+			"devide",
+			"round_",
+			"fleqn",
+			"fleqned",
+			"aligned",
+			"flalign",
+			"aligned",
+			"fig ",
+			"fig",
+			"Fig",
+			"fig",
+			"inherently",
+			"*",
+			"todo",
+			"alu",
+			"boo",
+			"(",
+			"With",
+			"thesis",
+			"bellow",
+			"allot",
+			"lye",
+			"principals",
+			"theses",
+			"??",
+			"aligned",
+			"flalign",
+			"split",
+			"equation",
+			"2",
+			"&",
+			"from: \\ci"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "cuda.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 91445,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+									[
+										54500,
+										54500
+									],
+									[
+										73162,
+										73162
+									]
+								],
+								"scope": "bookmarks"
+							}
+						},
+						"selection":
+						[
+							[
+								9048,
+								9048
+							]
+						],
+						"settings":
+						{
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5376.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "build-all.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 753,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "build-all.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 822,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "build-thesis.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 560,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.684375,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 157.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.stino_build_panel":
+	{
+		"height": 0.0
+	},
+	"output.stino_panel":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/latex.sublime-build",
+	"project": "paper.sublime-project",
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 118.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

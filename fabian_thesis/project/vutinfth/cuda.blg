@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: cuda.aux
+The style file: alpha.bst
+Database file #1: bibfile.bib
+Warning--to sort, need author or key in stack:overflow_2014
+Warning--empty institution in pipelinecomp
+Warning--empty booktitle in parmeth
+You've used 13 entries,
+            2543 wiz_defined-function locations,
+            633 strings with 6682 characters,
+and the built_in function-call counts, 3781 in all, are:
+= -- 369
+> -- 130
+< -- 9
++ -- 36
+- -- 36
+* -- 199
+:= -- 625
+add.period$ -- 43
+call.type$ -- 13
+change.case$ -- 68
+chr.to.int$ -- 13
+cite$ -- 17
+duplicate$ -- 166
+empty$ -- 325
+format.name$ -- 56
+if$ -- 786
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 8
+newline$ -- 72
+num.names$ -- 36
+pop$ -- 105
+preamble$ -- 1
+purify$ -- 80
+quote$ -- 0
+skip$ -- 132
+stack$ -- 0
+substring$ -- 119
+swap$ -- 11
+text.length$ -- 9
+text.prefix$ -- 8
+top$ -- 0
+type$ -- 92
+warning$ -- 3
+while$ -- 28
+width$ -- 15
+write$ -- 170
+(There were 3 warnings)

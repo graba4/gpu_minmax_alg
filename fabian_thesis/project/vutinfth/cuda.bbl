@@ -1,0 +1,82 @@
+\begin{thebibliography}{{NVI}12}
+
+\bibitem[Grc11]{Grcar2011163}
+Joseph~F. Grcar.
+\newblock How ordinary elimination became gaussian elimination.
+\newblock {\em Historia Mathematica}, 38(2):163 -- 218, 2011.
+
+\bibitem[KH10]{Kirk:2010:PMP:1841511}
+David~B. Kirk and Wen-mei~W. Hwu.
+\newblock {\em Programming Massively Parallel Processors: A Hands-on Approach}.
+\newblock Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 1st edition,
+  2010.
+
+\bibitem[Luo14]{pipelinecomp}
+Danny Luong.
+\newblock Pipeline computations pipelined addition \& system of linear
+  equations.
+\newblock Technical report, 2014.
+
+\bibitem[NVI]{toolkit}
+NVIDIA.
+\newblock Ptx isa :: {CUDA} toolkit documentation.
+\newblock
+  \url{http://docs.nvidia.com/cuda/parallel-thread-execution/index.html#grid-of-cooperative-thread-arrays__thread-batching}.
+\newblock [Online; accessed 19-Feb-2017].
+
+\bibitem[{NVI}12]{nvidia_kepler_2012}
+{NVIDIA}.
+\newblock Kepler {GK110} whitepaper, 2012.
+
+\bibitem[OR12]{Introduction-to-GPUs}
+OpenCL Dev. Team~AMD Ofer~Rosenberg, PMTS~SW.
+\newblock Introduction-to-{GPUs}.
+\newblock Technical report, Haifux, 2012.
+\newblock \url{http://haifux.org/lectures/267/Introduction-to-GPUs.pdf}.
+
+\bibitem[P.06]{parmeth}
+Gergel~V. P.
+\newblock Parallel methods for solving linear equation systems.
+\newblock NNSU, Nizhni Novgorod, 2006.
+
+\bibitem[RR10]{opac-b1133063}
+Thomas Rauber and Gudula Rünger.
+\newblock {\em Parallel programming: for multicore and cluster systems}.
+\newblock Springer-Verlag, Berlin, 2010.
+
+\bibitem[Sha17]{wiki:CPU_block_dia}
+R.~S. Shaw.
+\newblock {CPU} block diagram.svg.
+\newblock
+  \url{https://upload.wikimedia.org/wikipedia/commons/5/52/CPU_block_diagram.svg},
+  2 February 2017.
+\newblock [Online; accessed 18-Feb-2017].
+
+\bibitem[SK10]{Sanders:2010:CEI:1891996}
+Jason Sanders and Edward Kandrot.
+\newblock {\em {CUDA} by Example: An Introduction to General-Purpose {GPU}
+  Programming}.
+\newblock Addison-Wesley Professional, 1st edition, 2010.
+
+\bibitem[sta14]{stack:overflow_2014}
+Stackoverflow: "{Calculate} the sum of values in an array using renderscript".
+\newblock
+  \url{http://stackoverflow.com/questions/21734275/calculate-the-sum-of-values-in-an-array-using-renderscript},
+  Feb 2014.
+\newblock [Online; accessed 19-Feb-2017].
+
+\bibitem[Tat]{tatourian}
+Alan Tatourian.
+\newblock {NVIDIA} {GPU} architecture and {CUDA} programming environment.
+\newblock
+  \url{https://code.msdn.microsoft.com/windowsdesktop/NVIDIA-GPU-Architecture-45c11e6d}.
+\newblock [Online; accessed 19-Feb-2017].
+
+\bibitem[Wik17]{wiki:gaussian}
+Wikipedia.
+\newblock Gaussian elimination.
+\newblock \url{https://en.wikipedia.org/wiki/Gaussian_elimination}, 2 February
+  2017.
+\newblock [Online; accessed 7-Feb-2017].
+
+\end{thebibliography}

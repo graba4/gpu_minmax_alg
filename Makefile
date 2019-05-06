@@ -10,8 +10,8 @@ INCLUDES  := -Icommon/inc
 HOST_COMPILER ?= gcc
 HOST_COMPILER_ARGS := -pedantic -O3 -Wall -std=c99 -D_XOPEN_SOURCE=500 -D_BSD_SOURCE -g 
 
-NVCC = $(CUDA_PATH)/bin/nvcc $(CCFLAGS)
-CCFLAGS = -Wno-deprecated-gpu-targets -O3 --gpu-architecture=$(ARCH)
+NVCC = $(COMPILE) $(CCFLAGS)
+CCFLAGS = -Wno-deprecated-gpu-targets -O3 -D_FORCE_INLINES --gpu-architecture=$(ARCH)
 C_COMPILE = -ccbin $(HOST_COMPILER) $(addprefix -Xcompiler , $(HOST_COMPILER_ARGS))
 
 WIDTH = 100
@@ -23,7 +23,7 @@ build: min_max
 min_max.o:min_max.cpp
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
-min_max: implementations.o min_max.o io.o errors.o resources.o #implementations_cpu.o
+min_max: min_max.o resources.o io.o errors.o cuda_deque.o implementations.o #implementations_cpu.o
 	$(NVCC) -o $@ $+ 
 
 io.o: io.cpp
@@ -32,8 +32,11 @@ io.o: io.cpp
 errors.o: errors.cpp
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
+cuda_deque.o: cuda_deque.cu
+	$(NVCC) $(INCLUDES) -dc -o $@ -c $<
+
 implementations.o: implementations.cu
-	$(NVCC) $(INCLUDES) -o $@ -c $<
+	$(NVCC) $(INCLUDES) -dc -o $@ -c $<
 
 #implementations_cpu.o: implementations_cpu.cpp
 	#$(NVCC) $(INCLUDES) -o $@ -c $<

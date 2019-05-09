@@ -20,6 +20,7 @@ public:
 	__device__ void push_front(int val);
 	__device__ void pop_front();
 	__device__ void pop_back();
+	__device__ void print();
 
 private:
 	uint len;

@@ -56,11 +56,20 @@ void create_matrix(cuda_matrix *matrix, int arrlen, bool clear)
 		}
 	}
 
+	//print_matrix(h_matrix, arrlen);
+
 	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*arrlen);
 	checkCudaErrors(error);
 
-	error = cudaMemcpy(matrix->d_matrix, h_matrix, sizeof(double)*(arrlen), cudaMemcpyHostToDevice);
+	error = cudaMalloc(&(matrix->d_minval), sizeof(double)*arrlen);
 	checkCudaErrors(error);
+
+	error = cudaMalloc(&(matrix->d_maxval), sizeof(double)*arrlen);
+	checkCudaErrors(error);
+
+	error = cudaMemcpy(matrix->d_matrix, h_matrix, arrlen*sizeof(double), cudaMemcpyHostToDevice);
+	checkCudaErrors(error);
+
 
 	free_matrix(h_matrix);
 }
@@ -72,6 +81,10 @@ void free_matrix(cuda_matrix *matrix)
 	//error = cudaFree(matrix->d_reference);
 	//checkCudaErrors(error);
 	error = cudaFree(matrix->d_matrix);
+	checkCudaErrors(error);
+	error = cudaFree(matrix->d_maxval);
+	checkCudaErrors(error);
+	error = cudaFree(matrix->d_minval);
 	checkCudaErrors(error);
 	//error = cudaFree(matrix->d_solution);
 	//checkCudaErrors(error);
@@ -101,7 +114,7 @@ void print_matrix(double *matrix, int length)
 	assert(matrix != NULL);
 
 	/* image row */
-	for (int i = 0; i < length+1; i++){
+	for (int i = 0; i < length; i++){
 		printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
 	}
 	printf("\n");

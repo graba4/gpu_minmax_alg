@@ -33,7 +33,7 @@ void process_args(int argc, char *argv[], io_info *info){
 
 	info->f = stdout;
 
-	while ((opt = getopt(argc, argv, "v:c:i:r:f:t:")) != -1) {
+	while ((opt = getopt(argc, argv, "v:c:i:w:r:f:t:")) != -1) {
 		switch (opt) {
 		    case 'v':
 		    	opt_int = strtol(optarg, &endptr, 10);

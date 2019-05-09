@@ -19,7 +19,7 @@
 #define BETWEEN(value, min, max) (value < max && value > min)
 #define DEV_ID (0)
 
-__global__ void naive_aproach_one_thread(cuda_matrix *matrix);
+__global__ void naive_aproach_one_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size);
 
 double naive_aproach_fabian(cuda_matrix *matrix){
 	cudaDeviceProp prop;
@@ -42,7 +42,7 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 
 	StartTimer();
 	{
-		naive_aproach_one_thread<<<blocks, threads>>>(matrix);
+		naive_aproach_one_thread<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
 	};
 
@@ -54,31 +54,42 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 	return time;
 } 
 
-__global__ void naive_aproach_one_thread(cuda_matrix *matrix){
+__device__ void print_matrixx(double *matrix, int length)
+{
+	assert(matrix != NULL);
+
+	/* image row */
+	for (int i = 0; i < length; i++){
+		printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
+	}
+	printf("\n");
+}
+
+__global__ void naive_aproach_one_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size){
 	int tid = threadIdx.x,
 		block_id = gridDim.x;
 	cuda_deque U, L;
-	u_int w = matrix->window_size;
-	double *a = matrix->d_matrix,
-		   *maxval = matrix->d_maxval,
-		   *minval = matrix->d_minval;
+	double *a = matrix;
+	print_matrixx(a, arrlen);
 
-	if (tid == 0 && block_id == 0) //only one thread
+	if (tid == 0 && block_id == 1) //only one thread
 	{
-		for(u_int i=1; i < matrix->arrlen; ++i){
-			if(i >= w){
-				maxval[i-w] = a[U.size() > 0 ? U.front():i-1];
-				minval[i-w] = a[L.size() > 0 ? L.front():i-1];
+		for(u_int i = 1; i < arrlen; ++i){
+			if(i >= window_size){
+				maxval[i-window_size] = a[U.size() > 0 ? U.front():i-1];
+				minval[i-window_size] = a[L.size() > 0 ? L.front():i-1];
 			}
+				
 
 			if(a[i] > a[i-1]){
 				L.push_back(i-1);
-				if(i == w + L.front())
+				
+				if(i == window_size + L.front())
 					L.pop_front();
 
 				while(U.size() > 0){
 					if(a[i] <= a[U.back()]){
-						if(i == w + U.front())
+						if(i == window_size + U.front())
 							U.pop_front();
 						break;
 					}
@@ -86,12 +97,16 @@ __global__ void naive_aproach_one_thread(cuda_matrix *matrix){
 				}
 			}else{
 				U.push_back(i-1);
-				if(i == w + U.front())
+				continue;
+				
+				if(i == window_size + U.front())
 					U.pop_front();
 				
+				
 				while(L.size() > 0){
+					break;
 					if(a[i] >= a[L.back()]){
-						if(i == w + L.front())
+						if(i == window_size + L.front())
 							L.pop_front();
 						break;
 					}
@@ -99,7 +114,11 @@ __global__ void naive_aproach_one_thread(cuda_matrix *matrix){
 				}
 			}
 		}
-		maxval[matrix->arrlen - w] = a[U.size() > 0 ? U.front() : matrix->arrlen-1];
-		minval[matrix->arrlen - w] = a[L.size() > 0 ? L.front() : matrix->arrlen-1];
+		maxval[arrlen - window_size] = a[U.size() > 0 ? U.front() : arrlen-1];
+		minval[arrlen - window_size] = a[L.size() > 0 ? L.front() : arrlen-1];
+		
+		print_matrixx(maxval, arrlen);	
+		print_matrixx(minval, arrlen);
+		
 	}
 }

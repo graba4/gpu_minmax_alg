@@ -47,7 +47,7 @@ void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int see
 	} else {
 		h_matrix = (double *)malloc(sizeof(double) * arrlen);
 		assert(h_matrix != NULL);
-		unsigned int seed = (seed==0)? time(NULL) : seed;
+		seed = (seed==0)? time(NULL) : seed;
 		matrix->seed = seed;
 
 		for (int i = 0; i < arrlen; ++i){

@@ -14,7 +14,7 @@ NVCC = $(COMPILE) $(CCFLAGS)
 CCFLAGS = -Wno-deprecated-gpu-targets -O3 -D_FORCE_INLINES --gpu-architecture=$(ARCH)
 C_COMPILE = -ccbin $(HOST_COMPILER) $(addprefix -Xcompiler , $(HOST_COMPILER_ARGS))
 
-WIDTH = 10
+WIDTH = 10000
 
 all: build check
 
@@ -45,7 +45,7 @@ resources.o: resources.cu
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
 check:
-	cuda-memcheck ./min_max -v $(WIDTH) -w 3 -c 1 -i 0 -t 1
+	cuda-memcheck ./min_max -v $(WIDTH) -w 30 -c 1 -i 0 -t 2
 
 clean:
 	rm -f min_max *.o

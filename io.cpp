@@ -13,27 +13,29 @@
 #define BETWEEN(value, min, max) (value <= max && value >= min)
 
 char* usage(char *argv[], char *usage_msg){
-	(void)sprintf(usage_msg, "Usage: %s -v arrlen -w windowsize -c cores -i implementation [-r revisions] [-f file] [-t threads]", argv[0]);
+	(void)sprintf(usage_msg, "Usage: %s -v arrlen -w windowsize -c cores -i implementation [-r revisions] [-f file] [-s seed] [-t threads]", argv[0]);
 	return usage_msg;
 }
 
 void process_args(int argc, char *argv[], io_info *info){
-	int opt,
+	unsigned int opt,
 		opt_int,
 		opt_cnt = 1,
-		revisions_opt = 1;
+		revisions_opt = 1,
+		seed_opt = 0;
 
 	bool v_opt = false,
 		 c_opt = false,
 		 i_opt = false,
 		 t_opt = false,
-		 w_opt = false;
+		 w_opt = false,
+		 s_opt = false;
 	char *endptr;
 	char usage_str[STRLEN];
 
 	info->f = stdout;
 
-	while ((opt = getopt(argc, argv, "v:c:i:w:r:f:t:")) != -1) {
+	while ((opt = getopt(argc, argv, "v:c:i:w:r:s:f:t:")) != -1) {
 		switch (opt) {
 		    case 'v':
 		    	opt_int = strtol(optarg, &endptr, 10);
@@ -53,9 +55,9 @@ void process_args(int argc, char *argv[], io_info *info){
 		    	opt_int = strtol(optarg, &endptr, 10);
 			    if (*endptr != '\0')
 			    	error_exit(1, usage(argv, usage_str));
-			    if (opt_int < 1)
+			    if (opt_int < 3)
 			    {
-			    	(void)fprintf(stderr, "Invalid number of windowsize!\n");
+			    	(void)fprintf(stderr, "Invalid number of windowsize! Minimum 3\n");
 			    	error_exit(1, usage(argv, usage_str));
 			    }
 		    	opt_cnt+=2;
@@ -98,6 +100,19 @@ void process_args(int argc, char *argv[], io_info *info){
 		    	opt_cnt+=2;
 		  		break;
 
+		  	case 's':
+		  		seed_opt = strtol(optarg, &endptr, 10);
+			    if (*endptr != '\0')
+					error_exit(1, usage(argv, usage_str));
+				if (seed_opt == 0)
+				{
+					(void)fprintf(stderr, "seed 0 is not allowed\n");
+					error_exit(1, usage(argv, usage_str));
+				}
+				opt_cnt+=2;
+				s_opt = true;
+		  		break;
+
 		  	case 'f':
 		  		info->f = fopen(optarg, "a+");
 		  		opt_cnt+=2;
@@ -132,8 +147,9 @@ void process_args(int argc, char *argv[], io_info *info){
 	}
 
 	if (!t_opt) 
-		info->t_opt = -1;
+		info->t_opt = 1;
 
+	info->seed = seed_opt;
 	info->revisions = revisions_opt;
 }
 
@@ -145,7 +161,7 @@ void process_output(io_info *info){
 	}
 	average = average/info->revisions;
 
-	fprintf(info->f, "%d,%d,%d,%.2f,%d\n", info->v_opt, info->w_opt, info->c_opt, average, info->i_opt);
+	fprintf(info->f, "%d,%d,%d,%.2f,%d,%d\n", info->v_opt, info->w_opt, info->c_opt, average, info->i_opt, info->seed);
 	fflush(info->f);
 	fclose(info->f);
 }

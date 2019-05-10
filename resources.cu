@@ -9,7 +9,7 @@ __global__ void print_ref(double *ref, int len);
 cuda_matrix* allocate_recources(io_info *info);
 void free_matrix(double *matrix);
 void free_matrix(cuda_matrix *matrix);
-void create_matrix(cuda_matrix *matrix, int arrlen, bool clear);
+void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed);
 void print_matrix(double *matrix, int length);
 void gen_reference(cuda_matrix *matrix, double *h_matrix, int length);
 void print_dev_info();
@@ -26,7 +26,8 @@ cuda_matrix* allocate_recources(io_info *info)
 	matrix->thread_count = info->t_opt;
 	matrix->window_size = info->w_opt;
 
-	create_matrix(matrix, arrlen, false);
+	create_matrix(matrix, arrlen, false, info->seed);
+	info->seed = matrix->seed;
 
 	error = cudaMalloc(&(matrix->d_solution), sizeof(double)*arrlen);
 	checkCudaErrors(error);
@@ -35,7 +36,7 @@ cuda_matrix* allocate_recources(io_info *info)
 }
 
 #define DEC_FACTOR (1000)
-void create_matrix(cuda_matrix *matrix, int arrlen, bool clear)
+void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed)
 {
 	cudaError error;
 	double *h_matrix;
@@ -46,7 +47,7 @@ void create_matrix(cuda_matrix *matrix, int arrlen, bool clear)
 	} else {
 		h_matrix = (double *)malloc(sizeof(double) * arrlen);
 		assert(h_matrix != NULL);
-		unsigned int seed = time(NULL);
+		unsigned int seed = (seed==0)? time(NULL) : seed;
 		matrix->seed = seed;
 
 		for (int i = 0; i < arrlen; ++i){

@@ -65,9 +65,11 @@ __device__ void print_matrixx(double *matrix, int length)
 	printf("\n");
 }
 
+#define MIN_WIN_SIZE (3)
 __global__ void naive_aproach_one_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size){
 	int tid = threadIdx.x,
 		block_id = gridDim.x;
+	assert(window_size >= MIN_WIN_SIZE);
 	cuda_deque U, L;
 	double *a = matrix;
 	print_matrixx(a, arrlen);
@@ -79,7 +81,6 @@ __global__ void naive_aproach_one_thread(double *matrix, double *minval, double 
 				maxval[i-window_size] = a[U.size() > 0 ? U.front():i-1];
 				minval[i-window_size] = a[L.size() > 0 ? L.front():i-1];
 			}
-				
 
 			if(a[i] > a[i-1]){
 				L.push_back(i-1);
@@ -97,14 +98,12 @@ __global__ void naive_aproach_one_thread(double *matrix, double *minval, double 
 				}
 			}else{
 				U.push_back(i-1);
-				//continue;
 				
 				if(i == window_size + U.front())
 					U.pop_front();
 				
 				
 				while(L.size() > 0){
-					//break;
 					if(a[i] >= a[L.back()]){
 						if(i == window_size + L.front())
 							L.pop_front();

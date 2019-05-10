@@ -4,12 +4,13 @@
 
 typedef struct io_info
 {
-	int v_opt,
+	unsigned int v_opt,
 	c_opt,
 	i_opt,
 	t_opt,
 	w_opt,
 	revisions,
+	seed,
 	run_nr;
 	FILE *f;
 

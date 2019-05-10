@@ -97,14 +97,14 @@ __global__ void naive_aproach_one_thread(double *matrix, double *minval, double 
 				}
 			}else{
 				U.push_back(i-1);
-				continue;
+				//continue;
 				
 				if(i == window_size + U.front())
 					U.pop_front();
 				
 				
 				while(L.size() > 0){
-					break;
+					//break;
 					if(a[i] >= a[L.back()]){
 						if(i == window_size + L.front())
 							L.pop_front();

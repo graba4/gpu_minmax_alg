@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case 1:
+				info.durations[info.run_nr] = naive_aproach_amar(matrix);
 				break;
 
 			case 2:

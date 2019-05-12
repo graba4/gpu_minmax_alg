@@ -71,7 +71,7 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 
 	StartTimer();
 	{
-		naive_aproach_one_thread<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
+		par_alg_inc_win<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
 	};
 
@@ -194,9 +194,16 @@ __global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, 
 
 	int addr_offs = (tid + shift_amount) + bid*window_size*2;
 	while(addr_offs+window_size < arrlen) {
-		Min_Max_calc m((double *)(matrix + addr_offs));
-		minval[addr_offs] = m.getMin();
-		maxval[addr_offs] = m.getMax();
+		double min, max;
+		min = max = matrix[addr_offs];
+		//Min_Max_calc m(matrix + addr_offs, window_size);
+		for (int i = addr_offs+1; i < window_size; ++i)
+		{
+			min = (matrix[i] < min)? matrix[i] : min;
+			max = (matrix[i] > max)? matrix[i] : max;
+		}
+		minval[addr_offs] = min;
+		maxval[addr_offs] = max;
 
 		addr_offs += gridDim.x;
 	}
@@ -210,9 +217,16 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 
 	int addr_offs = (tid + shift_amount) + bid*window_size;
 	while(addr_offs+window_size < arrlen) {
-		Min_Max_calc m((double *)(matrix + addr_offs));
-		minval[addr_offs] = m.getMin();
-		maxval[addr_offs] = m.getMax();
+		double min, max;
+		min = max = matrix[addr_offs];
+		//Min_Max_calc m(matrix + addr_offs, window_size);
+		for (int i = addr_offs+1; i < window_size; ++i)
+		{
+			min = (matrix[i] < min)? matrix[i] : min;
+			max = (matrix[i] > max)? matrix[i] : max;
+		}
+		minval[addr_offs] = min;
+		maxval[addr_offs] = max;
 
 		addr_offs += window_size;
 	}

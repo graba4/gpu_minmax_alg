@@ -23,6 +23,13 @@ __global__ void naive_aproach_one_thread(double *matrix, double *minval, double 
 
 __global__ void naive_aproach_multi_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size);
 
+__global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, int arrlen, int window_size);
+
+__global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxval, int arrlen, int window_size);
+
+__device__ void print_matrixx(double *matrix, int length);
+
+
 class Min_Max_calc
 {
 private:
@@ -71,7 +78,7 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 
 	StartTimer();
 	{
-		par_alg_inc_win<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
+		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
 	};
 
@@ -80,7 +87,7 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 
 	//check_solutions<<<1,threads, threads*sizeof(double)>>>(matrix->var_count, matrix->d_solution, matrix->d_reference);
 	//checkCudaErrors(cudaDeviceSynchronize());
-	printf("Time: %f\n", time);
+	printf("Time: %f\n", time);	
 	return time;
 }
 
@@ -105,7 +112,7 @@ double naive_aproach_amar(cuda_matrix *matrix){
 
 	StartTimer();
 	{
-		naive_aproach_multi_thread<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
+		naive_aproach_one_thread<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
 	};
 
@@ -121,12 +128,13 @@ double naive_aproach_amar(cuda_matrix *matrix){
 __device__ void print_matrixx(double *matrix, int length)
 {
 	assert(matrix != NULL);
-
-	/* image row */
-	for (int i = 0; i < length; i++){
-		printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
+	if(blockIdx.x == 0 && threadIdx.x == 0){
+		/* image row */
+		for (int i = 0; i < length; i++){
+			printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
+		}
+		printf("\n");
 	}
-	printf("\n");
 }
 
 #define MIN_WIN_SIZE (3)
@@ -193,20 +201,25 @@ __global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, 
 	assert(window_size >= MIN_WIN_SIZE);
 
 	int addr_offs = (tid + shift_amount) + bid*window_size*2;
-	while(addr_offs+window_size < arrlen) {
+	while(addr_offs+window_size < arrlen + 1) {
 		double min, max;
 		min = max = matrix[addr_offs];
 		//Min_Max_calc m(matrix + addr_offs, window_size);
-		for (int i = addr_offs+1; i < window_size; ++i)
+		for (int i = addr_offs + 1; i < addr_offs + window_size; ++i)
 		{
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
 		}
+		//printf("%.2f %.2f %d %d\n", max, min, arrlen, addr_offs);
 		minval[addr_offs] = min;
 		maxval[addr_offs] = max;
 
 		addr_offs += gridDim.x;
 	}
+	//__syncthreads();
+	//print_matrixx(matrix, arrlen);	
+	//print_matrixx(maxval, arrlen);	
+	//print_matrixx(minval, arrlen);
 }
 
 __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxval, int arrlen, int window_size){
@@ -216,11 +229,11 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 	assert(window_size >= MIN_WIN_SIZE);
 
 	int addr_offs = (tid + shift_amount) + bid*window_size;
-	while(addr_offs+window_size < arrlen) {
+	while(addr_offs+window_size < arrlen + 1) {
 		double min, max;
 		min = max = matrix[addr_offs];
 		//Min_Max_calc m(matrix + addr_offs, window_size);
-		for (int i = addr_offs+1; i < window_size; ++i)
+		for (int i = addr_offs+1; i < addr_offs + window_size; ++i)
 		{
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
@@ -230,6 +243,10 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 
 		addr_offs += window_size;
 	}
+	//__syncthreads();
+	//print_matrixx(matrix, arrlen);	
+	//print_matrixx(maxval, arrlen);	
+	//print_matrixx(minval, arrlen);
 }
 
 __global__ void naive_aproach_multi_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size){

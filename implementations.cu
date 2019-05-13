@@ -61,26 +61,27 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 	cudaDeviceProp prop;
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
 
-	int blocks,
+	int blocks = matrix->core_count,
 		threads = matrix->thread_count,
 		max_threads = prop.maxThreadsPerBlock,
 		max_sm = prop.multiProcessorCount;
 
-	blocks = matrix->core_count; //(matrix->var_count >= max_threads)? (matrix->var_count/max_threads)+1 : 1;
-	/*
-	if (matrix->thread_count < 0)
-		threads = (matrix->var_count >= max_threads)? max_threads : matrix->var_count;
-	else
-		threads = (matrix->thread_count >= max_threads)? max_threads : matrix->thread_count;
-	*/
-	/*if (blocks > prop.multiProcessorCount)
-		error_exit(3, (char*)"CUDA Device out of shared memory!");*/
+	assert(max_threads >= threads);
+	assert(max_sm >= blocks);
 
+	print_matrix(matrix->h_matrix, matrix->arrlen);
 	StartTimer();
 	{
-		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
+		par_alg_inc_win<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
+		cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+		checkCudaErrors(error);
+		error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+		checkCudaErrors(error);
 	};
+
+	print_matrix(matrix->h_minval, matrix->arrlen);
+	print_matrix(matrix->h_maxval, matrix->arrlen);
 
 	//assert(threads*sizeof(double) <= prop.sharedMemPerBlock);
 	double time = GetTimer()/1000;
@@ -128,6 +129,7 @@ double naive_aproach_amar(cuda_matrix *matrix){
 __device__ void print_matrixx(double *matrix, int length)
 {
 	assert(matrix != NULL);
+	__syncthreads();
 	if(blockIdx.x == 0 && threadIdx.x == 0){
 		/* image row */
 		for (int i = 0; i < length; i++){
@@ -196,11 +198,11 @@ __global__ void naive_aproach_one_thread(double *matrix, double *minval, double 
 
 __global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, int arrlen, int window_size){
 	int tid = threadIdx.x,
-		bid = blockIdx.x,
-		shift_amount = 0;
+		bid = blockIdx.x;
 	assert(window_size >= MIN_WIN_SIZE);
 
-	int addr_offs = (tid + shift_amount) + bid*window_size*2;
+	int addr_offs = (tid) + bid*window_size*2;
+
 	while(addr_offs+window_size < arrlen + 1) {
 		double min, max;
 		min = max = matrix[addr_offs];
@@ -210,16 +212,21 @@ __global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, 
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
 		}
+		if (minval[addr_offs] != 0.0) //shows if there is overlapping
+		{
+			printf("error tid %d block %d offset %d\n", tid, bid, addr_offs);
+		}
 		//printf("%.2f %.2f %d %d\n", max, min, arrlen, addr_offs);
 		minval[addr_offs] = min;
 		maxval[addr_offs] = max;
 
-		addr_offs += gridDim.x;
+		addr_offs += ((addr_offs+blockDim.x)%(window_size*2) == 0)? window_size*2*(gridDim.x - 1)+blockDim.x : blockDim.x;
+		//addr_offs += blockDim.x;
+		if ((addr_offs+1)%(window_size*2) == 0)
+		{
+			printf("bid: %d %d\n", bid, window_size*2*(gridDim.x - bid)+blockDim.x);
+		}
 	}
-	//__syncthreads();
-	//print_matrixx(matrix, arrlen);	
-	//print_matrixx(maxval, arrlen);	
-	//print_matrixx(minval, arrlen);
 }
 
 __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxval, int arrlen, int window_size){

@@ -9,7 +9,10 @@ typedef struct cuda_matrix
 		   *d_solution, //not used
 		   *d_ref_matrix, //not used
 		   *d_maxval,
-		   *d_minval;
+		   *d_minval,
+		   *h_maxval,
+		   *h_minval,
+		   *h_matrix;
 	unsigned int seed;
 	int arrlen, //length of d_matrix
 		window_size,
@@ -20,5 +23,6 @@ typedef struct cuda_matrix
 cuda_matrix* allocate_recources(io_info *info);
 void free_matrix(cuda_matrix *matrix);
 void print_dev_info();
+void print_matrix(double *matrix, int length);
 
 #endif

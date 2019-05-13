@@ -25,6 +25,10 @@ cuda_matrix* allocate_recources(io_info *info)
 	matrix->core_count = info->c_opt;
 	matrix->thread_count = info->t_opt;
 	matrix->window_size = info->w_opt;
+	matrix->h_maxval = (double *)calloc(arrlen, sizeof(double));
+	matrix->h_minval = (double *)calloc(arrlen, sizeof(double));
+	assert(matrix->h_maxval != NULL);
+	assert(matrix->h_minval != NULL);
 
 	create_matrix(matrix, arrlen, false, info->seed);
 	info->seed = matrix->seed;
@@ -35,7 +39,7 @@ cuda_matrix* allocate_recources(io_info *info)
 	return matrix;
 }
 
-#define DEC_FACTOR (1000)
+#define DEC_FACTOR (10)
 void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed)
 {
 	cudaError error;
@@ -71,8 +75,7 @@ void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int see
 	error = cudaMemcpy(matrix->d_matrix, h_matrix, arrlen*sizeof(double), cudaMemcpyHostToDevice);
 	checkCudaErrors(error);
 
-
-	free_matrix(h_matrix);
+	matrix->h_matrix = h_matrix;
 }
 
 void free_matrix(cuda_matrix *matrix)
@@ -87,6 +90,11 @@ void free_matrix(cuda_matrix *matrix)
 	checkCudaErrors(error);
 	error = cudaFree(matrix->d_minval);
 	checkCudaErrors(error);
+	free(matrix->h_maxval);
+	free(matrix->h_minval);
+	free(matrix->h_matrix);
+
+
 	//error = cudaFree(matrix->d_solution);
 	//checkCudaErrors(error);
 

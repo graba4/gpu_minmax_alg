@@ -201,8 +201,8 @@ __global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, 
 		bid = blockIdx.x;
 	assert(window_size >= MIN_WIN_SIZE);
 
-	int addr_offs = (tid) + bid*window_size*2;
-
+	int addr_offs = (tid) + bid*blockDim.x;
+	//printf("%d\n", addr_offs);
 	while(addr_offs+window_size < arrlen + 1) {
 		double min, max;
 		min = max = matrix[addr_offs];
@@ -212,20 +212,17 @@ __global__ void par_alg_inc_win(double *matrix, double *minval, double *maxval, 
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
 		}
-		if (minval[addr_offs] != 0.0) //shows if there is overlapping
-		{
-			printf("error tid %d block %d offset %d\n", tid, bid, addr_offs);
-		}
+		assert(minval[addr_offs] == 0.0); //shows if there is overlapping
 		//printf("%.2f %.2f %d %d\n", max, min, arrlen, addr_offs);
 		minval[addr_offs] = min;
 		maxval[addr_offs] = max;
-
-		addr_offs += ((addr_offs+blockDim.x)%(window_size*2) == 0)? window_size*2*(gridDim.x - 1)+blockDim.x : blockDim.x;
-		//addr_offs += blockDim.x;
-		if ((addr_offs+1)%(window_size*2) == 0)
-		{
-			printf("bid: %d %d\n", bid, window_size*2*(gridDim.x - bid)+blockDim.x);
-		}
+		//printf("%d\n", blockDim.x);
+		//addr_offs += (bid == (blockDim.x - 1)) ? gridDim.x*blockDim.x : blockDim.x;
+		//addr_offs += ((addr_offs+blockDim.x)%(gridDim.x) == 0)? window_size*2*(gridDim.x - 1)+blockDim.x : blockDim.x;
+		addr_offs += blockDim.x*gridDim.x;
+		//if ((addr_offs+1)%(window_size*2) == 0){
+		//	printf("bid: %d %d\n", bid, window_size*2*(gridDim.x - bid)+blockDim.x);
+		//}
 	}
 }
 

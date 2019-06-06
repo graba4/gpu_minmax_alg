@@ -28,14 +28,16 @@ int main(int argc, char *argv[])
 
 	for (info.run_nr = 0; info.run_nr < info.revisions; ++info.run_nr)
 	{
-		cuda_matrix *matrix = allocate_recources(&info);
+		
 		switch(info.i_opt){
 			case 0:
+				cuda_matrix *matrix = allocate_recources(&info);
 				info.durations[info.run_nr] = naive_aproach_fabian(matrix);
 
 				break;
 
 			case 1:
+				cuda_matrix *matrix = allocate_recources(&info);
 				info.durations[info.run_nr] = naive_aproach_amar(matrix);
 				break;
 

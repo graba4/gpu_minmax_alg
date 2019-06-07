@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <assert.h>
+#include <helper_functions.h>
 
 #define STRLEN (1024)
 #define BETWEEN(value, min, max) (value <= max && value >= min)

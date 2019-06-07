@@ -33,14 +33,14 @@ int main(int argc, char *argv[])
 			case 0:
 				matrix = allocate_recources(&info);
 				//cuda_matrix *matrix = allocate_recources(&info);
-				info.durations[info.run_nr] = naive_aproach_fabian(matrix);
+				info.durations[info.run_nr] = cuda_parallel_approach(matrix);
 				//free_matrix(matrix);
 				break;
 
 			case 1:
 				matrix = allocate_recources(&info);
 				//cuda_matrix *matrix = allocate_recources(&info);
-				info.durations[info.run_nr] = naive_aproach_amar(matrix);
+				info.durations[info.run_nr] = sequential_approach(matrix);
 				//free_matrix(matrix);
 				break;
 

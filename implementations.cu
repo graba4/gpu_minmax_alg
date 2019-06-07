@@ -15,9 +15,16 @@
 #include "errors.h"
 #include "cuda_schedule.h"
 
+#include <thrust/host_vector.h>
+#include <thrust/generate.h>
+#include <thrust/device_vector.h>
+#include <thrust/extrema.h>
+#include <thrust/execution_policy.h>
+
 #define ROUND_UP(N, S) (N%S == 0) ? N/S : N/S+1
 #define BETWEEN(value, min, max) (value < max && value > min)
 #define DEV_ID (0)
+#define MIN_WIN_SIZE (3)
 
 __global__ void naive_aproach_one_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size);
 
@@ -88,6 +95,66 @@ double naive_aproach_fabian(cuda_matrix *matrix){
 
 	//check_solutions<<<1,threads, threads*sizeof(double)>>>(matrix->var_count, matrix->d_solution, matrix->d_reference);
 	//checkCudaErrors(cudaDeviceSynchronize());
+	printf("Time: %f\n", time);	
+	return time;
+}
+
+double thrust_approach(io_info *info) {
+
+	int thrust_core_count = info->c_opt;
+	int thrust_thread_count = info->t_opt;
+	int thrust_window_size = info->w_opt;
+	int thrust_arrlen = info->v_opt;
+
+	assert(thrust_window_size >= MIN_WIN_SIZE);
+
+	thrust::host_vector<int> h_vec(thrust_arrlen); // generating a vector of wanted size
+	thrust::generate(h_vec.begin(), h_vec.end(), rand); // filling it with the random numbers, problem: generating same random values as before not possible
+	thrust::device_vector<int> d_vec = h_vec; // generating a vector on the gpu
+	thrust::device_vector<int> thrust_minval(thrust_arrlen);
+	thrust::device_vector<int> thrust_maxval(thrust_arrlen);
+
+
+	//inicijalizacija koristene graficke kartice
+	cudaDeviceProp prop;
+	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
+
+	int blocks = thrust_core_count,
+		threads = thrust_thread_count,
+		max_threads = prop.maxThreadsPerBlock,
+		max_sm = prop.multiProcessorCount;
+
+	assert(max_threads >= threads);
+	assert(max_sm >= blocks);
+	//ovo sve moze ostati, nije nikakav problem
+
+	
+	for (int i=0; i<thrust_arrlen; i++) {
+		std::cout << h_vec[i] << " ";
+	}
+	printf("\n");
+	
+	for (int i=0; i<(thrust_arrlen-thrust_window_size); i++) {
+		thrust::detail::normal_iterator< thrust::device_ptr<int> > minimum = thrust::min_element(thrust::device, d_vec.begin()+i, d_vec.begin()+i+thrust_window_size);
+		thrust::detail::normal_iterator< thrust::device_ptr<int> > maximum = thrust::max_element(thrust::device, d_vec.begin()+i, d_vec.begin()+i+thrust_window_size);
+		thrust_minval[i] = *minimum;
+		thrust_maxval[i] = *maximum;
+	}
+	
+
+	StartTimer();
+	double time = GetTimer()/1000;
+
+	for (int i=0; i<thrust_arrlen; i++) {
+		std::cout << thrust_minval[i] << " ";
+	}
+	printf("\n");
+
+	for (int i=0; i<thrust_arrlen; i++) {
+		std::cout << thrust_maxval[i] << " ";
+	}
+	printf("\n");
+	
 	printf("Time: %f\n", time);	
 	return time;
 }

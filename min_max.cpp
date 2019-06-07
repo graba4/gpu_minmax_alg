@@ -28,20 +28,24 @@ int main(int argc, char *argv[])
 
 	for (info.run_nr = 0; info.run_nr < info.revisions; ++info.run_nr)
 	{
-		
+		cuda_matrix *matrix;	
 		switch(info.i_opt){
 			case 0:
-				cuda_matrix *matrix = allocate_recources(&info);
+				matrix = allocate_recources(&info);
+				//cuda_matrix *matrix = allocate_recources(&info);
 				info.durations[info.run_nr] = naive_aproach_fabian(matrix);
-
+				//free_matrix(matrix);
 				break;
 
 			case 1:
-				cuda_matrix *matrix = allocate_recources(&info);
+				matrix = allocate_recources(&info);
+				//cuda_matrix *matrix = allocate_recources(&info);
 				info.durations[info.run_nr] = naive_aproach_amar(matrix);
+				//free_matrix(matrix);
 				break;
 
 			case 2:
+				info.durations[info.run_nr] = thrust_approach(&info);
 				break;
 			
 			case 3:

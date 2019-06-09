@@ -7,7 +7,7 @@
 #include "io.h"
 #include "errors.h"
 #include "implementations.h"
-//#include "implementations_cpu.h"
+#include "implementations_cpu.h"
 #include <assert.h>
 #include "resources.h"
 
@@ -20,12 +20,13 @@ int main(int argc, char *argv[])
 	info.durations = dur;
 	print_dev_info();
 
+	/*
 	printf("arrlen: %d\n", info.v_opt);
 	printf("SM cores: %d\n", info.c_opt);
 	printf("cuda cores: %d\n", info.t_opt);
 	printf("implementation: %d\n", info.i_opt);
 	printf("revisions: %d\n", info.revisions);
-
+	*/
 	for (info.run_nr = 0; info.run_nr < info.revisions; ++info.run_nr)
 	{
 		cuda_matrix *matrix;	
@@ -61,7 +62,10 @@ int main(int argc, char *argv[])
 			default:
 				error_exit(2, (char *)"Invalid implemetation Nr.");
 		}
-		//free_matrix(matrix);
+		min_max_cpu(matrix);
+		assert(verify(matrix));
+
+		free_matrix(matrix);
 	}
 
 	process_output(&info);

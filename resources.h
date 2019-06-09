@@ -5,9 +5,6 @@
 typedef struct cuda_matrix
 {
 	double *d_matrix, //the array where we want to operate
-		   *d_reference, //not used
-		   *d_solution, //not used
-		   *d_ref_matrix, //not used
 		   *d_maxval,
 		   *d_minval,
 		   *h_maxval,

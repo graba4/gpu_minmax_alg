@@ -23,7 +23,7 @@ build: min_max
 min_max.o:min_max.cpp
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
-min_max: min_max.o resources.o io.o errors.o cuda_deque.o implementations.o #implementations_cpu.o
+min_max: min_max.o resources.o io.o errors.o cuda_deque.o implementations.o implementations_cpu.o
 	$(NVCC) -o $@ $+ 
 
 io.o: io.cpp
@@ -38,14 +38,14 @@ cuda_deque.o: cuda_deque.cu
 implementations.o: implementations.cu
 	$(NVCC) $(INCLUDES) -dc -o $@ -c $<
 
-#implementations_cpu.o: implementations_cpu.cpp
-	#$(NVCC) $(INCLUDES) -o $@ -c $<
+implementations_cpu.o: implementations_cpu.cu
+	$(NVCC) $(INCLUDES) -o $@ -c $<
 
 resources.o: resources.cu
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
 check:
-	cuda-memcheck ./min_max -v $(WIDTH) -w 3 -c 2 -i 3 -t 1024
-	
+	./min_max -v $(WIDTH) -w 3 -c 2 -i 0 -t 5
+
 clean:
 	rm -f min_max *.o

@@ -49,21 +49,17 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 	assert(max_threads >= threads);
 	assert(max_sm >= blocks);
 
-	//print_matrix(matrix->h_matrix, matrix->arrlen);
-	checkCudaErrors(cudaDeviceSynchronize());
 	StartTimer();
 	{
 		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
-		cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
-		error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
 	};
 
+	//assert(threads*sizeof(double) <= prop.sharedMemPerBlock);
 	double time = GetTimer()/1000;
-	//print_matrix(matrix->h_minval, matrix->arrlen);
-	//print_matrix(matrix->h_maxval, matrix->arrlen);
+
+	//check_solutions<<<1,threads, threads*sizeof(double)>>>(matrix->var_count, matrix->d_solution, matrix->d_reference);
+	//checkCudaErrors(cudaDeviceSynchronize());
 	printf("Time: %f\n", time);	
 	return time;
 }
@@ -206,9 +202,9 @@ double sequential_approach(cuda_matrix *matrix){
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
 
 	int blocks,
-		threads = matrix->thread_count,
-		max_threads = prop.maxThreadsPerBlock,
-		max_sm = prop.multiProcessorCount;
+		threads = matrix->thread_count;
+		//max_threads = prop.maxThreadsPerBlock,
+		//max_sm = prop.multiProcessorCount;
 
 	blocks = matrix->core_count;
 

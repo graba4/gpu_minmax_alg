@@ -1,0 +1,1319 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"h_ma",
+				"h_maxval"
+			],
+			[
+				"h_",
+				"h_minval"
+			],
+			[
+				"block",
+				"blockIdx\tblockIdx"
+			],
+			[
+				"for",
+				"for_\tFor Loop"
+			],
+			[
+				"cuda",
+				"cuda_minval"
+			],
+			[
+				"cu",
+				"cudaMemcpy\tcudaMemcpy"
+			],
+			[
+				"time",
+				"time_spent"
+			],
+			[
+				"ti",
+				"tid"
+			],
+			[
+				"off",
+				"addr_offs"
+			],
+			[
+				"mi",
+				"min"
+			],
+			[
+				"pr",
+				"printf\tprintf …"
+			],
+			[
+				"idx",
+				"threadIdx"
+			],
+			[
+				"tid",
+				"threadIdx\tthreadIdx"
+			],
+			[
+				"blo",
+				"block_id"
+			],
+			[
+				"min",
+				"minval"
+			],
+			[
+				"prin",
+				"print_matrixx"
+			],
+			[
+				"get",
+				"getMax"
+			],
+			[
+				"arr",
+				"arrlen"
+			],
+			[
+				"doubl",
+				"double"
+			],
+			[
+				"see",
+				"seed"
+			],
+			[
+				"sed",
+				"seed_opt"
+			],
+			[
+				"max",
+				"maxval"
+			],
+			[
+				"Ser",
+				"Serial3"
+			],
+			[
+				"ser",
+				"Serial"
+			],
+			[
+				"byte",
+				"bytecnt"
+			],
+			[
+				"byt",
+				"bytecnt"
+			],
+			[
+				"las",
+				"temp_last"
+			],
+			[
+				"Sel",
+				"Serial"
+			],
+			[
+				"beg",
+				"begin"
+			],
+			[
+				"pri",
+				"println"
+			],
+			[
+				"set",
+				"setDevicePin"
+			],
+			[
+				"setd",
+				"setDeviceName"
+			],
+			[
+				"in",
+				"inc\t#include <…>"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"uin",
+				"uint8_t"
+			],
+			[
+				"out",
+				"outFile"
+			],
+			[
+				"rea",
+				"ready"
+			],
+			[
+				"Disa",
+				"Display"
+			],
+			[
+				"SD",
+				"SD_CS"
+			],
+			[
+				"er",
+				"errno"
+			],
+			[
+				"print",
+				"println"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"def",
+				"define"
+			],
+			[
+				"SPI",
+				"SPI_CS"
+			],
+			[
+				"Defa",
+				"DEFAULT_POS_Y"
+			],
+			[
+				"defa",
+				"DEFAULT_POS_X"
+			],
+			[
+				"Ima",
+				"ImageSaver"
+			],
+			[
+				"cl",
+				"class\tclass-..-(class)"
+			],
+			[
+				"star",
+				"start"
+			],
+			[
+				"d_",
+				"d_matrix"
+			],
+			[
+				"t",
+				"tp\ttemplate <typename ${1:_InputIter}>"
+			],
+			[
+				"temp",
+				"b_temp"
+			],
+			[
+				"lock",
+				"locks"
+			],
+			[
+				"lo",
+				"locks_h"
+			],
+			[
+				"c",
+				"cmem\tcudaMemcpy"
+			],
+			[
+				"bloc",
+				"block_size"
+			],
+			[
+				"thre",
+				"threads"
+			],
+			[
+				"__",
+				"__s\t__syncthreads()"
+			],
+			[
+				"f",
+				"fprintf\tfprintf …"
+			],
+			[
+				"opt",
+				"optarg"
+			],
+			[
+				"bo",
+				"blockIdx"
+			],
+			[
+				"_",
+				"__global__"
+			],
+			[
+				"nai",
+				"naive_aproach"
+			],
+			[
+				"err",
+				"errors"
+			],
+			[
+				"b",
+				"block"
+			],
+			[
+				"thr",
+				"threadIdx"
+			],
+			[
+				"var",
+				"var_count"
+			],
+			[
+				"tid_",
+				"tid_temp"
+			],
+			[
+				"DEV",
+				"DEV_ID"
+			],
+			[
+				"na",
+				"naive_aproach_single_cuda"
+			],
+			[
+				"p",
+				"printf\tprintf …"
+			],
+			[
+				"te",
+				"temp_p"
+			],
+			[
+				"d",
+				"d_matrix"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"fre",
+				"free"
+			],
+			[
+				"check",
+				"checkCudaErrors"
+			],
+			[
+				"che",
+				"checkCudaErrors"
+			],
+			[
+				"si",
+				"size_t"
+			],
+			[
+				"de",
+				"dev"
+			],
+			[
+				"div",
+				"divide"
+			],
+			[
+				"du",
+				"durations"
+			],
+			[
+				"ma",
+				"matrix"
+			],
+			[
+				"free",
+				"free_matrix"
+			],
+			[
+				"rev",
+				"revisions"
+			],
+			[
+				"revi",
+				"revisions_opt"
+			],
+			[
+				"usage",
+				"usage_str"
+			],
+			[
+				"usag",
+				"usage_str"
+			],
+			[
+				"usa",
+				"usage"
+			],
+			[
+				"NV",
+				"NVCCFLAGS"
+			],
+			[
+				"str",
+				"STRLEN"
+			],
+			[
+				"host",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"Hos",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"u",
+				"usage_msg"
+			],
+			[
+				"Ho",
+				"HOST_COMPILER_ARGS"
+			],
+			[
+				"io_",
+				"io_info"
+			],
+			[
+				"i_o",
+				"i_info"
+			],
+			[
+				"erro",
+				"error_exit"
+			],
+			[
+				"inc",
+				"inc\t#include \"…\""
+			],
+			[
+				"io",
+				"io_info"
+			],
+			[
+				"st",
+				"struct\tstruct"
+			],
+			[
+				"cm",
+				"cmalmng\tcudaMallocManaged"
+			],
+			[
+				"supp",
+				"supp_list"
+			],
+			[
+				"pag",
+				"page"
+			],
+			[
+				"ele",
+				"elem"
+			],
+			[
+				"list",
+				"mapid_list"
+			],
+			[
+				"info",
+				"info"
+			],
+			[
+				"mapid",
+				"mapid_ref"
+			],
+			[
+				"map",
+				"mapid_t"
+			],
+			[
+				"get_",
+				"get_mapinfo"
+			],
+			[
+				"new",
+				"new_id"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"of",
+				"ofs"
+			],
+			[
+				"inf",
+				"mapid_info"
+			],
+			[
+				"mapi",
+				"mapid_t"
+			],
+			[
+				"page",
+				"pages"
+			],
+			[
+				"bytes",
+				"bytes_written"
+			],
+			[
+				"user",
+				"user_buffer"
+			],
+			[
+				"sys",
+				"syscall_mmap"
+			],
+			[
+				"syscall_m",
+				"syscall_mmap"
+			],
+			[
+				"syscall_mm",
+				"syscall_munmap"
+			],
+			[
+				"don",
+				"donation_list"
+			],
+			[
+				"curr",
+				"thread_current"
+			],
+			[
+				"thread",
+				"thread_current"
+			],
+			[
+				"read",
+				"ready_list"
+			],
+			[
+				"stack",
+				"stack_rev"
+			],
+			[
+				"stck",
+				"stack_start"
+			],
+			[
+				"kpa",
+				"kpage_end"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "implementations.cu",
+			"settings":
+			{
+				"buffer_size": 8477,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "min_max.cpp",
+			"settings":
+			{
+				"buffer_size": 1243,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "implementations_cpu.cu",
+			"settings":
+			{
+				"buffer_size": 2583,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources.cu",
+			"settings":
+			{
+				"buffer_size": 3755,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1210,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#ifndef RESOURCES_H\n#define RESOURCES_H\n#include \"io.h\"\n\ntypedef struct cuda_matrix\n{\n\tdouble *d_matrix, //the array where we want to operate\n\t\t   *d_maxval,\n\t\t   *d_minval,\n\t\t   *h_maxval,\n\t\t   *h_minval,\n\t\t   *h_matrix;\n\tunsigned int seed;\n\tint arrlen, //length of d_matrix\n\t\twindow_size,\n\t\tcore_count, //streaming multiproc\n\t\tthread_count; //cuda cores\n}cuda_matrix;\n\ncuda_matrix* allocate_recources(io_info *info);\nvoid free_matrix(cuda_matrix *matrix);\nvoid print_dev_info();\nvoid print_matrix(double *matrix, int length);\n\n#endif",
+			"file": "resources.h",
+			"file_size": 535,
+			"file_write_time": 132043710900000000,
+			"settings":
+			{
+				"buffer_size": 535,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "implementations_cpu.h",
+			"settings":
+			{
+				"buffer_size": 165,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cuda_deque.h",
+			"settings":
+			{
+				"buffer_size": 508,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "----CUDA-DEVICE----                        \nName: Tesla K10.G2.8GB                     \nClock Rate: 745000                         \nMemory: 3699MB                             \nMultiprocessors: 8                         \nThreads per block: 1024                    \nShared Mem per block: 49152                \n                                           \nTime: 0.000987                             \n10 5 3 7 2 6 1 4 3 8 2 10 5 4 4 2 1 1 10 8 \n3 3 2 2 1 1 1 3 2 2 2 4 4 2 1 1 1 1 0 0    \n10 7 7 7 6 6 4 8 8 10 10 10 5 4 4 2 10 10 0\n 0                                         \n20,3,2,0.00,0,1559925844                   \n[mirza@herz gpu_minmax_alg]$ make clean    \nrm -f min_max *.o                          \n[mirza@herz gpu_minmax_alg]$               \n",
+			"settings":
+			{
+				"buffer_size": 748,
+				"line_ending": "Unix",
+				"name": "Terminal (bash)",
+				"read_only": true,
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 137.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"cuda",
+				"Set Syntax: CUDA C++"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"termin",
+				"Terminal View: Open Bash Terminal"
+			],
+			[
+				"termi",
+				"Terminal View: Open Bash Terminal"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"",
+				"Bookmarks: Toggle"
+			],
+			[
+				"book",
+				"Bookmarks: Toggle"
+			],
+			[
+				"dic",
+				"Dictionaries: Set Language"
+			],
+			[
+				"make",
+				"Set Syntax: Makefile"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 444.0
+	},
+	"console":
+	{
+		"height": 174.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg"
+	],
+	"file_history":
+	[
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/resources.cu",
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/cuda_deque.cu",
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/fabian_thesis/project/implementations_cpu.cpp",
+		"/home/fabian/Schreibtisch/gpu/gpu_minmax_alg/min_max.cpp",
+		"/home/fabian/Schreibtisch/gpu/gpu_minmax_alg/min_max",
+		"/home/fabian/Dokumente/gpu_minmax_alg/io.cpp",
+		"/home/fabian/Dokumente/gpu_minmax_alg/io.h",
+		"/home/fabian/Dokumente/gpu_minmax_alg/fabian_thesis/project/common/findgllib.mk",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Image.h",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Sender.h",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Cam.h",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Trigger.h",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Sender.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/bilderstutzen.ino",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Trigger.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Cam.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Display.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Image.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/ImageSaver.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/HC-06-BT/src/bluetooth.cpp",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/HC-06-BT/src/bluetooth.h",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/JPEGDecoder/keywords.txt",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Arduino/README.md",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/Arduino/ArduCAM/examples/Shield_V2/ArduCAM_Shield_V2_Digital_Camera/ArduCAM_Shield_V2_Digital_Camera.ino",
+		"/P/test.c",
+		"/home/fabian/Dokumente/vrml/src/bilderstutzen/JPEGDecoder/src/JPEGDecoder.cpp",
+		"/C/Users/fabia/Desktop/openjpeg.h",
+		"/Y/vrml/src/bilderstutzen/ITEADLIB_Arduino_WeeESP8266/ESP8266.cpp",
+		"/Y/vrml/src/bilderstutzen/bilderstutzen.ino_old",
+		"/Y/vrml/src/bilderstutzen/HC-06-BT/examples/set_device_name.ino",
+		"/C/Users/fabia/Documents/Arduino/libraries/SoftwareSerial/SoftwareSerial.h",
+		"/C/Users/fabia/Documents/Arduino/libraries/SoftwareSerial/SoftwareSerial.cpp",
+		"/Y/vrml/src/bilderstutzen/scr_Bluetoothreceiver/receiver.java",
+		"/Y/bak-arbeit/project/resources.cu",
+		"/Y/bak-arbeit/project/implementations_cpu.cpp",
+		"/C/Users/fabia/Documents/Arduino/libraries/HC-06-BT/bluetooth.h",
+		"/C/Users/fabia/Documents/Arduino/libraries/HC-06-BT/bluetooth.cpp",
+		"/Y/vrml/src/bilderstutzen/JPEGDecoder/src/picojpeg.c",
+		"/Y/vrml/src/bilderstutzen/ImageSaver.h",
+		"/Y/vrml/src/bilderstutzen/Display.h",
+		"/Y/vrml/src/bilderstutzen/JPEGDecoder/src/JPEGDecoder.h",
+		"/Y/bak-arbeit/project/errors.cpp",
+		"/Y/bak-arbeit/project/io.cpp",
+		"/Y/vrml/src/bilderstutzen/JPEGDecoder/src/picojpeg.h",
+		"/Y/vrml/src/bilderstutzen/CImg/examples/tutorial.cpp",
+		"/Y/vrml/src/bilderstutzen/CImg/examples/use_draw_gradient.cpp",
+		"/Y/vrml/src/bilderstutzen/CImg/examples/image2ascii.cpp",
+		"/Y/vrml/src/bilderstutzen/CImg/CImg.h",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM/ArduCAM.h",
+		"/C/Users/fabia/Documents/Arduino/libraries/UTFT4ArduCAM_SPI/UTFT_SPI.cpp",
+		"/Y/vrml/src/bilderstutzen/Arduino/UTFT4ArduCAM_SPI/UTFT_SPI.h",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM_Touch/ArduCAM_Touch.cpp",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM_Touch/examples/touchpaint/touchpaint.ino",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM/ArduCAM.cpp",
+		"/Z/id_rsa.pub",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM/examples/Shield_V2/ArduCAM_Shield_V2_Capture2SD/ArduCAM_Shield_V2_Capture2SD.ino",
+		"/Y/microcontroller/task1/libglcd/glcd.c",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM/memorysaver.h",
+		"/Y/vrml/src/bilderstutzen/Arduino/ArduCAM/examples/REVC/ArduCAM_REVC_Capture2SD/ArduCAM_REVC_Capture2SD.ino",
+		"/C/Users/fabia/Documents/Arduino/libraries/ArduCAM/memorysaver.h",
+		"/Y/vrml/src/bilderstutzen/Arduino/UTFT4ArduCAM_SPI/UTFT_SPI.cpp",
+		"/Y/vrml/src/bilderstutzen/Arduino/UTFT4ArduCAM_SPI/DefaultFonts_SPI.c",
+		"/Y/vrml/src/bilderstutzen/ITEADLIB_Arduino_WeeESP8266/ESP8266.h",
+		"/Y/vrml/src/bilderstutzen/Image.h",
+		"/Y/vrml/src/bilderstutzen/Image.cpp",
+		"/Y/choices",
+		"/Y/smart-innovation/main.tex",
+		"/C/Users/fabia/Desktop/lcc/RUN-CREA.cmd",
+		"/C/Users/fabia/Desktop/lcc/ccminer.conf",
+		"/C/Users/fabia/Desktop/lcc/start.bat",
+		"/Y/dalu/task2/DALU_Bsp2/real-main.cpp",
+		"/C/Users/fabia/Documents/Monero/wallets/my money/my money.keys",
+		"/Y/bitcoin_forks.md",
+		"/Y/bak-arbeit/project/Makefile",
+		"/Y/bak-arbeit/project/resources.h",
+		"/Y/bak-arbeit/project/io.h",
+		"/Y/bak-arbeit/project/implementations.h",
+		"/Y/bak-arbeit/project/implementations.cu",
+		"/Y/bak-arbeit/project/benchmark.sh",
+		"/Y/bak-arbeit/project/lin-sys-solv.cpp",
+		"/C/Users/fabia/Desktop/Suchtbaum.java",
+		"/Y/bak-arbeit/project/cuda_schedule.h",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.cpp",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.h",
+		"/home/fabian/dokumente/bak-arbeit/project/results.csv",
+		"/home/fabian/dokumente/progos/pintos-progos/userprog/syscall.c",
+		"/home/fabian/dokumente/bak-arbeit/project/CUDA error at implementations.cu",
+		"/home/fabian/dokumente/bak-arbeit/project/Lock.h",
+		"/home/fabian/dokumente/bak-arbeit/project/io.h",
+		"/home/fabian/dokumente/betriebssysteme/1a/mydiff.c",
+		"/home/fabian/dokumente/bak-arbeit/project/results.txt",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations_cpu.cpp",
+		"/home/fabian/dokumente/betriebssysteme/1a/ispalindrom.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations_cpu.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_cuda.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_functions.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/timer.h",
+		"/home/fabian/dokumente/bak-arbeit/project/common/inc/helper_image.h",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/0_Simple/simplePrintf/simplePrintf.cu",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.cu.old",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/0_Simple/simplePrintf/Makefile",
+		"/home/fabian/dokumente/bak-arbeit/project/inc/helper_functions.h",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.c",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.cpp",
+		"/home/fabian/dokumente/bak-arbeit/project/errors.c",
+		"/home/fabian/dokumente/bak-arbeit/project/io.c",
+		"/home/fabian/dokumente/parcomp/pcrepo/image.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.cu",
+		"/usr/local/cuda-8.0/targets/x86_64-linux/include/host_defines.h",
+		"/home/fabian/dokumente/bak-arbeit/project/implementations.c",
+		"/usr/local/cuda-8.0/targets/x86_64-linux/include/fatbinary.h",
+		"/home/fabian/dokumente/bak-arbeit/NVIDIA_CUDA-8.0_Samples/5_Simulations/nbody/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/websh.c",
+		"/home/fabian/dokumente/bak-arbeit/project/implementaions.cu",
+		"/home/fabian/dokumente/betriebssysteme/2/schedule.c",
+		"/home/fabian/dokumente/bak-arbeit/project/lin-sys-solv.cu",
+		"/home/fabian/dokumente/betriebssysteme/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/3/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/3/battleships/Makefile",
+		"/home/fabian/dokumente/betriebssysteme/2/rshutdown.c",
+		"/home/fabian/dokumente/bak-arbeit/project/bac_thes.sublime-project",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/hash.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.c",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/user/syscall.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/diff.txt",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/vm/page.h",
+		"/home/fabian/dokumente/progos/gruppe/pintos-progos/userprog/process.h"
+	],
+	"find":
+	{
+		"height": 46.0
+	},
+	"find_in_files":
+	{
+		"height": 113.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"min",
+			"matrix->arrlen",
+			"par_alg_inc_win",
+			"matrix->h_",
+			")",
+			"print_matr",
+			"print_matrix",
+			"malloc",
+			"m",
+			"Null",
+			"arrlen",
+			"L",
+			"U",
+			"matrix->d_",
+			"matrix->",
+			"min",
+			"d_solution",
+			"cuda_deque",
+			"cuda-memcheck",
+			"print",
+			"par_alg_inc_win"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "implementations.cu",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8477,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2978,
+								2978
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/CUDA Snippets/cuda-c++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1958.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "min_max.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1243,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1010,
+								1010
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 746.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "implementations_cpu.cu",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2583,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1840,
+								1840
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/CUDA C++/cuda-c++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1641.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources.cu",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3755,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2512,
+								2512
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CUDA Snippets/cuda-c++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 178.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1210,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1181,
+								1181
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 953.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "resources.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								205,
+								205
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "implementations_cpu.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								73,
+								73
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "cuda_deque.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 508,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 8,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								733,
+								733
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_complete_commit_on_tab": false,
+							"caret_style": "blink",
+							"color_scheme": "Packages/TerminalView/TerminalView.hidden-tmTheme",
+							"draw_centered": false,
+							"draw_indent_guides": false,
+							"draw_white_space": "none",
+							"gutter": false,
+							"highlight_line": false,
+							"scroll_past_end": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"terminal_view": true,
+							"terminal_view_activate_args":
+							{
+								"cmd": "/bin/bash -l",
+								"cwd": "/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg",
+								"keep_open": false,
+								"syntax": null,
+								"title": "Terminal (bash)"
+							},
+							"terminal_view_last_cursor_pos":
+							[
+								16,
+								29
+							],
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 46.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.61969442275,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.555165038118,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 175.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"project": "fabian.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"res",
+				"resources.cu"
+			],
+			[
+				"imple",
+				"fabian_thesis/project/implementations_cpu.cpp"
+			],
+			[
+				"reso",
+				"resources.h"
+			],
+			[
+				"imp",
+				"implementations.h"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 272.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

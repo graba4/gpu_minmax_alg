@@ -16,10 +16,9 @@ void print_dev_info();
 
 cuda_matrix* allocate_recources(io_info *info)
 {
-	cudaError error;
 	int arrlen = info->v_opt;
 
-	cuda_matrix *matrix = (cuda_matrix*)malloc(sizeof(cuda_matrix));
+	cuda_matrix *matrix = (cuda_matrix*)calloc(1, sizeof(cuda_matrix));
 	assert(matrix != NULL);
 	matrix->arrlen = arrlen;
 	matrix->core_count = info->c_opt;
@@ -32,9 +31,6 @@ cuda_matrix* allocate_recources(io_info *info)
 
 	create_matrix(matrix, arrlen, false, info->seed);
 	info->seed = matrix->seed;
-
-	error = cudaMalloc(&(matrix->d_solution), sizeof(double)*arrlen);
-	checkCudaErrors(error);
 
 	return matrix;
 }
@@ -101,17 +97,6 @@ void free_matrix(cuda_matrix *matrix)
 	free(matrix);
 }
 
-//not used
-void gen_reference(cuda_matrix *matrix, double *h_matrix, int length)
-{
-	cudaError error;
-
-	error = cudaMalloc(&(matrix->d_reference), sizeof(double)*(length+1));
-	checkCudaErrors(error);
-	error = cudaMemcpy(matrix->d_reference, h_matrix, sizeof(double)*(length+1), cudaMemcpyHostToDevice);
-	checkCudaErrors(error);
-}
-
 void free_matrix(double *matrix)
 {
 	assert(matrix != NULL);
@@ -124,7 +109,7 @@ void print_matrix(double *matrix, int length)
 
 	/* image row */
 	for (int i = 0; i < length; i++){
-		printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
+		printf("%.0f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
 	}
 	printf("\n");
 }

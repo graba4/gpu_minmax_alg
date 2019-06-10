@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
 				break;
 			
 			case 3: //not implemented
+				matrix = allocate_recources(&info);
+				info.durations[info.run_nr] = streams_approach(&info);
 				break;
 
 			case 4:

@@ -10,6 +10,7 @@ cuda_matrix* allocate_recources(io_info *info);
 void free_matrix(double *matrix);
 void free_matrix(cuda_matrix *matrix);
 void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed);
+void create_matrix_streams(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed);
 void print_matrix(double *matrix, int length);
 void gen_reference(cuda_matrix *matrix, double *h_matrix, int length);
 void print_dev_info();
@@ -61,6 +62,31 @@ cuda_matrix* allocate_recources(io_info *info, int run_nr)
 	return matrix;
 }
 
+cuda_matrix* allocate_recources_streams(io_info *info)
+{
+	cudaError error;
+	int arrlen = info->v_opt;
+
+	cuda_matrix *matrix = (cuda_matrix*)malloc(sizeof(cuda_matrix));
+	assert(matrix != NULL);
+	matrix->arrlen = arrlen;
+	matrix->core_count = info->c_opt;
+	matrix->thread_count = info->t_opt;
+	matrix->window_size = info->w_opt;
+	matrix->h_maxval = (double *)calloc(arrlen, sizeof(double));
+	matrix->h_minval = (double *)calloc(arrlen, sizeof(double));
+	assert(matrix->h_maxval != NULL);
+	assert(matrix->h_minval != NULL);
+
+	create_matrix_streams(matrix, arrlen, false, info->seed);
+	info->seed = matrix->seed;
+
+	error = cudaMalloc(&(matrix->d_solution), sizeof(double)*arrlen);
+	checkCudaErrors(error);
+
+	return matrix;
+}
+
 #define DEC_FACTOR (10)
 
 void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed)
@@ -82,6 +108,44 @@ void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int see
 			//assert(h_matrix[i] > 0);
 		}
 	}
+	matrix->h_matrix = h_matrix;
+}
+
+void create_matrix_streams(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed)
+{
+	cudaError error;
+	double *h_matrix;
+
+	if (clear) {
+		h_matrix = (double *)calloc(arrlen, sizeof(double));
+		assert(h_matrix != NULL);
+	} else {
+		h_matrix = (double *)malloc(sizeof(double) * arrlen);
+		assert(h_matrix != NULL);
+		seed = (seed==0)? time(NULL) : seed;
+		matrix->seed = seed;
+
+		for (int i = 0; i < arrlen; ++i){
+			srand(seed*(i+1)*(arrlen+1)+i);
+			h_matrix[i] = ((double)rand()/(double)RAND_MAX)*DEC_FACTOR;
+			assert(h_matrix[i] > 0);
+		}
+	}
+
+	//print_matrix(h_matrix, arrlen);
+
+	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*arrlen);
+	checkCudaErrors(error);
+
+	error = cudaMalloc(&(matrix->d_minval), sizeof(double)*arrlen);
+	checkCudaErrors(error);
+
+	error = cudaMalloc(&(matrix->d_maxval), sizeof(double)*arrlen);
+	checkCudaErrors(error);
+
+	error = cudaMemcpyAsync(matrix->d_matrix, h_matrix, arrlen*sizeof(double), cudaMemcpyHostToDevice);
+	checkCudaErrors(error);
+
 	matrix->h_matrix = h_matrix;
 }
 

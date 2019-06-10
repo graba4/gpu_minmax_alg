@@ -165,6 +165,47 @@ double thrust_approach(cuda_matrix *matrix) {
 	return time_spent;
 }
 
+double streams_approach(io_info *info) {
+	cudaError error;
+	cudaDeviceProp prop;
+	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
+
+	int blocks, threads;
+	int max_threads = prop.maxThreadsPerBlock,
+		max_sm = prop.multiProcessorCount;
+
+	int nStreams = 4;
+	cudaStream_t streams[nStreams];
+
+	info->v_opt = (int)(info->v_opt / 4);
+	
+	cuda_matrix *matrix[4];
+
+	StartTimer();
+	for(int i=0; i < nStreams; ++i) {
+		cudaStreamCreate(&streams[i]);
+		matrix[i] = allocate_recources_streams(info); //this needs to be changed, in create_matrix we should do cudaMemcpyAsync instead of cudaMemcpy
+		blocks = matrix[i]->core_count;
+		threads = matrix[i]->thread_count;
+	}
+	for(int i=0; i < nStreams; ++i) {
+		par_alg_inc_blocks<<<blocks, threads, 0, streams[i]>>>(matrix[i]->d_matrix, matrix[i]->d_minval, matrix[i]->d_maxval, matrix[i]->arrlen, matrix[i]->window_size);
+	}
+	for(int i=0; i < nStreams; ++i) {
+		error = cudaMemcpyAsync(matrix[i]->h_minval, matrix[i]->d_minval, matrix[i]->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+		checkCudaErrors(error);
+	}
+	double time = GetTimer()/1000;
+
+	for (int i=0; i<nStreams; ++i) {
+		free_matrix(matrix[i]);
+	}
+
+
+	printf("Time: %f\n", time);	
+	return time;
+}
+
 double sequential_approach(cuda_matrix *matrix){
 	cudaDeviceProp prop;
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));

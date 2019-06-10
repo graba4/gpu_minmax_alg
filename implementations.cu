@@ -165,7 +165,7 @@ double thrust_approach(cuda_matrix *matrix) {
 	return time_spent;
 }
 
-double streams_approach(io_info *info) {
+double streams_approach(io_info *info, int run_nr) {
 	cudaError error;
 	cudaDeviceProp prop;
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
@@ -184,7 +184,7 @@ double streams_approach(io_info *info) {
 	StartTimer();
 	for(int i=0; i < nStreams; ++i) {
 		cudaStreamCreate(&streams[i]);
-		matrix[i] = allocate_recources_streams(info); //this needs to be changed, in create_matrix we should do cudaMemcpyAsync instead of cudaMemcpy
+		matrix[i] = allocate_recources_streams(info, run_nr); //this needs to be changed, in create_matrix we should do cudaMemcpyAsync instead of cudaMemcpy
 		blocks = matrix[i]->core_count;
 		threads = matrix[i]->thread_count;
 	}

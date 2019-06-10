@@ -60,7 +60,6 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 
 	//check_solutions<<<1,threads, threads*sizeof(double)>>>(matrix->var_count, matrix->d_solution, matrix->d_reference);
 	//checkCudaErrors(cudaDeviceSynchronize());
-	printf("Time: %f\n", time);	
 	return time;
 }
 
@@ -208,8 +207,8 @@ double sequential_approach(cuda_matrix *matrix){
 
 	blocks = matrix->core_count;
 
-	assert(max_threads >= threads);
-	assert(max_sm >= blocks);
+	//assert(max_threads >= threads);
+	//assert(max_sm >= blocks);
 
 	//print_matrix(matrix->h_matrix, matrix->arrlen);
 	blocks = 1;
@@ -301,9 +300,11 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 	int addr_offs = tid + bid*blockDim.x;
 	while(addr_offs+window_size < arrlen + 1) {
 		double min, max;
+		assert(addr_offs < arrlen);
 		min = max = matrix[addr_offs];
 		for (int i = addr_offs + 1; i < addr_offs + window_size; ++i)
 		{
+			assert(i < arrlen);
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
 		}

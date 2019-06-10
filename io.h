@@ -9,12 +9,14 @@ typedef struct io_info
 	i_opt,
 	t_opt,
 	w_opt,
+	a_opt,
 	revisions,
 	seed,
 	run_nr;
 	FILE *f;
 
-	double *durations;
+	double *durations_gpu;
+	double *durations_cpu;
 } io_info;
 
 void process_args(int argc, char *argv[], io_info *info);

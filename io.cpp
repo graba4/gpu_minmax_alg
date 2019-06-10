@@ -14,7 +14,7 @@
 #define BETWEEN(value, min, max) (value <= max && value >= min)
 
 char* usage(char *argv[], char *usage_msg){
-	(void)sprintf(usage_msg, "Usage: %s -v arrlen -w windowsize -c cores -i implementation [-r revisions] [-f file] [-s seed] [-t threads]", argv[0]);
+	(void)sprintf(usage_msg, "Usage: %s -v arrlen -w windowsize -c cores -i implementation [-r revisions] [-f file] [-s seed] [-t threads] [-a]", argv[0]);
 	return usage_msg;
 }
 
@@ -30,7 +30,8 @@ void process_args(int argc, char *argv[], io_info *info){
 		 i_opt = false,
 		 t_opt = false,
 		 w_opt = false,
-		 s_opt = false;
+		 s_opt = false,
+		 a_opt = false;
 	char *endptr;
 	char usage_str[STRLEN];
 
@@ -51,6 +52,16 @@ void process_args(int argc, char *argv[], io_info *info){
 				v_opt = true;
 				info->v_opt = opt_int;
 		        break;
+
+		    case 'a':
+			    if (opt_int != 0)
+			    {
+			    	(void)fprintf(stderr, "option a does not have a parameter!\n");
+			    	error_exit(1, usage(argv, usage_str));
+			    }
+		    	opt_cnt+=1;
+				a_opt = true;
+		    break;
 
 		    case 'w':
 		    	opt_int = strtol(optarg, &endptr, 10);
@@ -155,14 +166,20 @@ void process_args(int argc, char *argv[], io_info *info){
 }
 
 void process_output(io_info *info){
-	double average = 0;
+	double average_gpu = 0,
+		   average_cpu = 0;
 	for (int i = 0; i < info->revisions; ++i)
 	{
-		average += info->durations[i];
+		average_gpu += info->durations_gpu[i];
+		average_cpu += info->durations_cpu[i];
 	}
-	average = average/info->revisions;
+	average_gpu = average_gpu/info->revisions;
+	average_cpu = average_cpu/info->revisions;
 
-	fprintf(info->f, "%d,%d,%d,%.2f,%d,%d\n", info->v_opt, info->w_opt, info->c_opt, average, info->i_opt, info->seed);
+	printf("Cuda took: %f seconds\n", average_gpu);
+	printf("CPU took: %f seconds\n", average_cpu);
+
+	fprintf(info->f, "%d,%d,%d,%.2f,%.2f,%d,%d\n", info->v_opt, info->w_opt, info->c_opt, average_gpu, average_cpu, info->i_opt, info->seed);
 	fflush(info->f);
 	fclose(info->f);
 }

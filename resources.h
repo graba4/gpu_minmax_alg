@@ -17,7 +17,7 @@ typedef struct cuda_matrix
 		thread_count; //cuda cores
 }cuda_matrix;
 
-cuda_matrix* allocate_recources(io_info *info);
+cuda_matrix* allocate_recources(io_info *info, int run_nr);
 void free_matrix(cuda_matrix *matrix);
 void print_dev_info();
 void print_matrix(double *matrix, int length);

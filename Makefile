@@ -14,7 +14,7 @@ NVCC = $(COMPILE) $(CCFLAGS)
 CCFLAGS = -Wno-deprecated-gpu-targets -O3 -D_FORCE_INLINES --gpu-architecture=$(ARCH)
 C_COMPILE = -ccbin $(HOST_COMPILER) $(addprefix -Xcompiler , $(HOST_COMPILER_ARGS))
 
-WIDTH = 20
+WIDTH = 200
 
 all: build check
 
@@ -45,7 +45,7 @@ resources.o: resources.cu
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
 check:
-	./min_max -v $(WIDTH) -w 3 -c 2 -i 0 -t 5
+	./min_max -v 50000000 -w 30 -c 8 -i 0 -t 1000
 
 clean:
 	rm -f min_max *.o

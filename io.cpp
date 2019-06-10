@@ -37,7 +37,7 @@ void process_args(int argc, char *argv[], io_info *info){
 
 	info->f = stdout;
 
-	while ((opt = getopt(argc, argv, "v:c:i:w:r:s:f:t:")) != -1) {
+	while ((opt = getopt(argc, argv, "av:c:i:w:r:s:f:t:")) != -1) {
 		switch (opt) {
 		    case 'v':
 		    	opt_int = strtol(optarg, &endptr, 10);
@@ -54,12 +54,7 @@ void process_args(int argc, char *argv[], io_info *info){
 		        break;
 
 		    case 'a':
-			    if (opt_int != 0)
-			    {
-			    	(void)fprintf(stderr, "option a does not have a parameter!\n");
-			    	error_exit(1, usage(argv, usage_str));
-			    }
-		    	opt_cnt+=1;
+			    opt_cnt+=1;
 				a_opt = true;
 		    	break;
 

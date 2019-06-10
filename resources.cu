@@ -61,6 +61,47 @@ cuda_matrix* allocate_recources(io_info *info, int run_nr)
 	return matrix;
 }
 
+cuda_matrix* allocate_recources_thrust(io_info *info, int run_nr)
+{
+	clock_t both_begin = clock();
+	int arrlen = info->v_opt;
+
+	cuda_matrix *matrix = (cuda_matrix*)calloc(1, sizeof(cuda_matrix));
+	assert(matrix != NULL);
+	matrix->arrlen = arrlen;
+	matrix->core_count = info->c_opt;
+	matrix->thread_count = info->t_opt;
+	matrix->window_size = info->w_opt;
+	create_matrix(matrix, arrlen, false, info->seed);
+	info->seed = matrix->seed;
+
+	clock_t both_end = clock();
+	double both_time_spent = (double)(both_end - both_begin) / CLOCKS_PER_SEC;
+
+	clock_t cpu_begin = clock();
+	matrix->h_maxval = (double *)calloc(arrlen, sizeof(double));
+	matrix->h_minval = (double *)calloc(arrlen, sizeof(double));
+	assert(matrix->h_maxval != NULL);
+	assert(matrix->h_minval != NULL);
+	clock_t cpu_end = clock();
+	double cpu_time_spent = (double)(cpu_end - cpu_begin) / CLOCKS_PER_SEC;	
+
+	clock_t gpu_begin = clock();
+	cudaError error;
+	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*arrlen);
+	checkCudaErrors(error);
+
+	error = cudaMemcpy(matrix->d_matrix, matrix->h_matrix, arrlen*sizeof(double), cudaMemcpyHostToDevice);
+	checkCudaErrors(error);
+	clock_t gpu_end = clock();
+	double gpu_time_spent = (double)(gpu_end - gpu_begin) / CLOCKS_PER_SEC;
+
+	info->durations_gpu[run_nr] += (!info->a_opt) ? both_time_spent + gpu_time_spent : 0;
+	info->durations_cpu[run_nr] += (!info->a_opt) ? both_time_spent + cpu_time_spent : 0;
+
+	return matrix;
+}
+
 cuda_matrix* allocate_recources_streams(io_info *info, int run_nr)
 {
 	clock_t both_begin = clock();

@@ -42,14 +42,15 @@ struct arbitrary_functor
 	int window_size;
     template <typename Tuple>
     __host__ __device__
-    void operator()(const Tuple& t)
+    void operator()(const Tuple &t)
     {
-        double* d_first = &thrust::get<0>(t);
+    	using namespace thrust;
+        double* d_first = &get<0>(t);
 
-        double *min = thrust::min_element(thrust::device, d_first, d_first + window_size);
-    	thrust::get<1>(t) = min[0];
-    	double *max = thrust::max_element(thrust::device, d_first, d_first + window_size);
-    	thrust::get<2>(t) = max[0];
+        double *min = min_element(device, d_first, d_first + window_size);
+    	get<1>(t) = min[0];
+    	double *max = max_element(device, d_first, d_first + window_size);
+    	get<2>(t) = max[0];
     }
 };
 
@@ -101,6 +102,7 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 
 #define DEC_FACTOR (10)
 double thrust_approach(cuda_matrix *matrix) {
+	using namespace thrust; //we dont have to write thrust:: anymore
 	cudaDeviceProp prop;
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
 
@@ -121,48 +123,39 @@ double thrust_approach(cuda_matrix *matrix) {
 
 	checkCudaErrors(cudaDeviceSynchronize());
 	StartTimer();
-	clock_t begin = clock();
-	{
-	  	arbitrary_functor arb;
-	  	arb.window_size = thrust_window_size;
+  	arbitrary_functor arb;
+  	arb.window_size = thrust_window_size;
 
-	  	thrust::device_vector<double> thrust_minval(thrust_arrlen);
-		thrust::device_vector<double> thrust_maxval(thrust_arrlen);
+  	device_vector<double> thrust_minval(thrust_arrlen);
+	device_vector<double> thrust_maxval(thrust_arrlen);
 
-	  	thrust::device_ptr<double> matrix_ptr = thrust::device_pointer_cast(matrix->d_matrix);
-	  	
-	  	thrust::device_ptr<double> d_first = thrust::device_pointer_cast(matrix->d_matrix);
-	  	thrust::device_ptr<double> d_last = thrust::device_pointer_cast(matrix->d_matrix) + thrust_arrlen - thrust_window_size + 1;
-	  	thrust::device_ptr<double> min_first = thrust_minval.data();
-	  	thrust::device_ptr<double> min_last = thrust_minval.data() + thrust_arrlen - thrust_window_size + 1;
-	  	thrust::device_ptr<double> max_first = thrust_maxval.data();
-	  	thrust::device_ptr<double> max_last = thrust_maxval.data() + thrust_arrlen - thrust_window_size + 1;
+  	device_ptr<double> matrix_ptr = device_pointer_cast(matrix->d_matrix);
+  	
+  	device_ptr<double> d_first = device_pointer_cast(matrix->d_matrix);
+  	device_ptr<double> d_last = device_pointer_cast(matrix->d_matrix) + thrust_arrlen - thrust_window_size + 1;
+  	device_ptr<double> min_first = thrust_minval.data();
+  	device_ptr<double> min_last = thrust_minval.data() + thrust_arrlen - thrust_window_size + 1;
+  	device_ptr<double> max_first = thrust_maxval.data();
+  	device_ptr<double> max_last = thrust_maxval.data() + thrust_arrlen - thrust_window_size + 1;
 
-		thrust::for_each(thrust::make_zip_iterator(thrust::make_tuple(d_first,
-																 	  min_first,
-																 	  max_first)),
-						 thrust::make_zip_iterator(thrust::make_tuple(d_last,
-						 										 	  min_last,
-						 										 	  max_last)),
-						 arb);
+	for_each(
+		make_zip_iterator(make_tuple(d_first, min_first, max_first)),
+		make_zip_iterator(make_tuple(d_last, min_last, max_last)),
+		arb
+	);
 
+	checkCudaErrors(cudaDeviceSynchronize());
+	//what is that??
+	copy(thrust_minval.begin(), thrust_minval.end(), device_pointer_cast(matrix->d_minval));
+	copy(thrust_maxval.begin(), thrust_maxval.end(), device_pointer_cast(matrix->d_maxval));
 
+	cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+	checkCudaErrors(error);
+	error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+	checkCudaErrors(error);
 
-		checkCudaErrors(cudaDeviceSynchronize());
-		thrust::copy(thrust_minval.begin(), thrust_minval.end(), thrust::device_pointer_cast(matrix->d_minval));
-		thrust::copy(thrust_maxval.begin(), thrust_maxval.end(), thrust::device_pointer_cast(matrix->d_maxval));
-
-		cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
-		error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
-	};
 	double time = GetTimer()/1000;
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
-	printf("Thurst alg time: %f\n", time_spent);	
-	return time_spent;
+	return time;
 }
 
 double streams_approach(io_info *info, int run_nr) {
@@ -171,8 +164,6 @@ double streams_approach(io_info *info, int run_nr) {
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
 
 	int blocks, threads;
-	int max_threads = prop.maxThreadsPerBlock,
-		max_sm = prop.multiProcessorCount;
 
 	int nStreams = 4;
 	cudaStream_t streams[nStreams];

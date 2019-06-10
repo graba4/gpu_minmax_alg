@@ -38,24 +38,21 @@ int main(int argc, char *argv[])
 		switch(info.i_opt){
 			case 0: //cuda parallel
 				matrix = allocate_recources(&info, info.run_nr);
-				//cuda_matrix *matrix = allocate_recources(&info, info.run_nr);
 				info.durations_gpu[info.run_nr] += cuda_parallel_approach(matrix);
 				break;
 
 			case 1: //cuda sequential
 				matrix = allocate_recources(&info, info.run_nr);
-				//cuda_matrix *matrix = allocate_recources(&info, info.run_nr);
 				info.durations_gpu[info.run_nr] += sequential_approach(matrix);
 				break;
 
-			case 2: //thrust
-				info.durations_gpu[info.run_nr] += thrust_approach(&info);
+			case 2: //thrust parallel
+				matrix = allocate_recources(&info, info.run_nr);
+				//printf("%.1f\n", thrust_approach(matrix));
+				info.durations_gpu[info.run_nr] += thrust_approach(matrix);
 				break;
 			
-			case 3: //thrust
-				matrix = allocate_recources(&info, info.run_nr);
-				//cuda_matrix *matrix = allocate_recources(&info, info.run_nr);
-				info.durations_gpu[info.run_nr] += thrust_approach_amar(matrix, &info);
+			case 3: //not implemented
 				break;
 
 			case 4:

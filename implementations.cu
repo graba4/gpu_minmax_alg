@@ -15,6 +15,7 @@
 #include "errors.h"
 #include "cuda_schedule.h"
 #include <iomanip>
+#include <ctime>
 
 #include <thrust/host_vector.h>
 #include <thrust/generate.h>
@@ -36,6 +37,34 @@ __global__ void par_alg_thrust(thrust::device_ptr<double> matrix, double *minval
 
 __device__ void print_matrixx(double *matrix, int length);
 
+struct arbitrary_functor
+{
+	int window_size;
+    template <typename Tuple>
+    __host__ __device__
+    void operator()(const Tuple& t)
+    {
+        double* d_first = &thrust::get<0>(t);
+
+        double *min = thrust::min_element(thrust::device, d_first, d_first + window_size);
+    	thrust::get<1>(t) = min[0];
+    	double *max = thrust::max_element(thrust::device, d_first, d_first + window_size);
+    	thrust::get<2>(t) = max[0];
+    }
+};
+
+__device__ void print_matrixx(double *matrix, int length)
+{
+	assert(matrix != NULL);
+	__syncthreads();
+	if(blockIdx.x == 0 && threadIdx.x == 0){
+		/* image row */
+		for (int i = 0; i < length; i++){
+			printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
+		}
+		printf("\n");
+	}
+}
 
 double cuda_parallel_approach(cuda_matrix *matrix){
 	cudaDeviceProp prop;
@@ -49,50 +78,36 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 	assert(max_threads >= threads);
 	assert(max_sm >= blocks);
 
+	checkCudaErrors(cudaDeviceSynchronize());
 	StartTimer();
+	clock_t begin = clock();
 	{
 		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 		checkCudaErrors(cudaDeviceSynchronize());
+		cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+		checkCudaErrors(error);
+		error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+		checkCudaErrors(error);
 	};
 
-	//assert(threads*sizeof(double) <= prop.sharedMemPerBlock);
 	double time = GetTimer()/1000;
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-	//check_solutions<<<1,threads, threads*sizeof(double)>>>(matrix->var_count, matrix->d_solution, matrix->d_reference);
-	//checkCudaErrors(cudaDeviceSynchronize());
-	return time;
+	printf("Cuda synchronize alg time: %f\n", time_spent);	
+
+	return time_spent;
 }
 
 #define DEC_FACTOR (10)
-double thrust_approach(io_info *info) {
-
-	int thrust_core_count = info->c_opt;
-	int thrust_thread_count = info->t_opt;
-	int thrust_window_size = info->w_opt;
-	int thrust_arrlen = info->v_opt;
-	unsigned int seed = info->seed;
-	seed = (seed==0)? time(NULL) : seed;
-
-	assert(thrust_window_size >= MIN_WIN_SIZE);
-
-	thrust::host_vector<double> h_vec(thrust_arrlen); // generating a vector of wanted size
-	//thrust::generate(h_vec.begin(), h_vec.end(), rand); // filling it with the random numbers, problem: generating same random values as before not possible
-	//thrust::device_vector<int> d_vec = h_vec; // generating a vector on the gpu
-	thrust::device_vector<double> thrust_minval(thrust_arrlen);
-	thrust::device_vector<double> thrust_maxval(thrust_arrlen);
-
-	//seed = (seed==0) ? time(NULL) : seed;
-	for (int i = 0; i < thrust_arrlen; ++i){
-		srand(seed*(i+1)*(thrust_arrlen+1)+i);
-		h_vec[i] = ((double)rand()/(double)RAND_MAX)*DEC_FACTOR;
-		assert(h_vec[i] > 0);
-	}
-	info->seed = seed;
-	thrust::device_vector<double> d_vec = h_vec; // generating a vector on the gpu
-
-	//inicijalizacija koristene graficke kartice
+double thrust_approach(cuda_matrix *matrix) {
 	cudaDeviceProp prop;
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
+
+	int thrust_core_count = matrix->core_count;
+	int thrust_thread_count = matrix->thread_count;
+	int thrust_window_size = matrix->window_size;
+	int thrust_arrlen = matrix->arrlen;
 
 	int blocks = thrust_core_count,
 		threads = thrust_thread_count,
@@ -101,100 +116,54 @@ double thrust_approach(io_info *info) {
 
 	assert(max_threads >= threads);
 	assert(max_sm >= blocks);
-	//ovo sve moze ostati, nije nikakav problem
-
-	
-	/*for (int i=0; i<thrust_arrlen; i++) {
-		std::cout << std::setprecision(1) << std::fixed << h_vec[i] << " ";
-	}
-	printf("\n");*/
-	checkCudaErrors(cudaDeviceSynchronize());
-	StartTimer();
-	for (int i=0; i<(thrust_arrlen-thrust_window_size)+1; i++) {
-		thrust::detail::normal_iterator< thrust::device_ptr<double> > minimum = thrust::min_element(thrust::device, d_vec.begin()+i, d_vec.begin()+i+thrust_window_size);
-		thrust::detail::normal_iterator< thrust::device_ptr<double> > maximum = thrust::max_element(thrust::device, d_vec.begin()+i, d_vec.begin()+i+thrust_window_size);
-		thrust_minval[i] = *minimum;
-		thrust_maxval[i] = *maximum;
-	}
-	checkCudaErrors(cudaDeviceSynchronize());
-	double time = GetTimer()/1000;
-
-	/*for (int i=0; i<thrust_arrlen; i++) {
-		std::cout << std::setprecision(1) << std::fixed << thrust_minval[i] << " ";
-	}
-	printf("\n");*/
-
-	/*for (int i=0; i<thrust_arrlen; i++) {
-		std::cout << std::setprecision(1) << std::fixed << thrust_maxval[i] << " ";
-	}
-	printf("\n");*/
-	
-	printf("Time: %f\n", time);	
-	return time;
-}
-
-#define DEC_FACTOR (10)
-double thrust_approach_amar(cuda_matrix *matrix, io_info *info) {
-	/*
-	int thrust_core_count = info->c_opt;
-	int thrust_thread_count = info->t_opt;
-	int thrust_window_size = info->w_opt;
-	int thrust_arrlen = info->v_opt;
-	unsigned int seed = info->seed;
-	seed = (seed==0)? time(NULL) : seed;
 
 	assert(thrust_window_size >= MIN_WIN_SIZE);
 
-	thrust::host_vector<double> h_vec(thrust_arrlen); // generating a vector of wanted size
-	//thrust::generate(h_vec.begin(), h_vec.end(), rand); // filling it with the random numbers, problem: generating same random values as before not possible
-	//thrust::device_vector<int> d_vec = h_vec; // generating a vector on the gpu
-	thrust::device_vector<double> thrust_minval(thrust_arrlen);
-	thrust::device_vector<double> thrust_maxval(thrust_arrlen);
-
-	//seed = (seed==0) ? time(NULL) : seed;
-	for (int i = 0; i < thrust_arrlen; ++i){
-		srand(seed*(i+1)*(thrust_arrlen+1)+i);
-		h_vec[i] = ((double)rand()/(double)RAND_MAX)*DEC_FACTOR;
-		assert(h_vec[i] > 0);
-	}
-	info->seed = seed;
-	thrust::device_vector<double> d_vec = h_vec; // generating a vector on the gpu
-	*/
-	//inicijalizacija koristene graficke kartice
-	cudaDeviceProp prop;
-	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
-
-	int blocks = matrix->core_count,
-		threads = matrix->thread_count,
-		max_threads = prop.maxThreadsPerBlock,
-		max_sm = prop.multiProcessorCount;
-
-	assert(max_threads >= threads);
-	assert(max_sm >= blocks);
-	//ovo sve moze ostati, nije nikakav problem
-
-
-	thrust::device_ptr<double> matrix_ptr = thrust::device_pointer_cast(matrix->d_matrix);
-	
-	print_matrix(matrix->h_matrix, matrix->arrlen);
 	checkCudaErrors(cudaDeviceSynchronize());
 	StartTimer();
+	clock_t begin = clock();
 	{
-		par_alg_thrust<<<blocks, threads>>>(matrix_ptr, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
+	  	arbitrary_functor arb;
+	  	arb.window_size = thrust_window_size;
+
+	  	thrust::device_vector<double> thrust_minval(thrust_arrlen);
+		thrust::device_vector<double> thrust_maxval(thrust_arrlen);
+
+	  	thrust::device_ptr<double> matrix_ptr = thrust::device_pointer_cast(matrix->d_matrix);
+	  	
+	  	thrust::device_ptr<double> d_first = thrust::device_pointer_cast(matrix->d_matrix);
+	  	thrust::device_ptr<double> d_last = thrust::device_pointer_cast(matrix->d_matrix) + thrust_arrlen - thrust_window_size + 1;
+	  	thrust::device_ptr<double> min_first = thrust_minval.data();
+	  	thrust::device_ptr<double> min_last = thrust_minval.data() + thrust_arrlen - thrust_window_size + 1;
+	  	thrust::device_ptr<double> max_first = thrust_maxval.data();
+	  	thrust::device_ptr<double> max_last = thrust_maxval.data() + thrust_arrlen - thrust_window_size + 1;
+
+		thrust::for_each(thrust::make_zip_iterator(thrust::make_tuple(d_first,
+																 	  min_first,
+																 	  max_first)),
+						 thrust::make_zip_iterator(thrust::make_tuple(d_last,
+						 										 	  min_last,
+						 										 	  max_last)),
+						 arb);
+
+
+
 		checkCudaErrors(cudaDeviceSynchronize());
+		thrust::copy(thrust_minval.begin(), thrust_minval.end(), thrust::device_pointer_cast(matrix->d_minval));
+		thrust::copy(thrust_maxval.begin(), thrust_maxval.end(), thrust::device_pointer_cast(matrix->d_maxval));
+
 		cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
 		checkCudaErrors(error);
 		error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
 		checkCudaErrors(error);
 	};
 	double time = GetTimer()/1000;
-	print_matrix(matrix->h_minval, matrix->arrlen);
-	print_matrix(matrix->h_maxval, matrix->arrlen);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-	printf("Time: %f\n", time);	
-	return time;
+	printf("Thurst alg time: %f\n", time_spent);	
+	return time_spent;
 }
-
 
 double sequential_approach(cuda_matrix *matrix){
 	cudaDeviceProp prop;
@@ -226,22 +195,9 @@ double sequential_approach(cuda_matrix *matrix){
 	double time = GetTimer()/1000;
 	//print_matrix(matrix->h_minval, matrix->arrlen);
 	//print_matrix(matrix->h_maxval, matrix->arrlen);
-	printf("Time: %f\n", time);
+	printf("Lemire alg time: %f\n", time);
 	return time;
 } 
-
-__device__ void print_matrixx(double *matrix, int length)
-{
-	assert(matrix != NULL);
-	__syncthreads();
-	if(blockIdx.x == 0 && threadIdx.x == 0){
-		/* image row */
-		for (int i = 0; i < length; i++){
-			printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
-		}
-		printf("\n");
-	}
-}
 
 #define MIN_WIN_SIZE (3)
 __global__ void lemire_one_thread(double *matrix, double *minval, double *maxval, int arrlen, int window_size){
@@ -308,25 +264,6 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
 		}
-		assert(minval[addr_offs] == 0.0); //shows if there is overlapping
-		minval[addr_offs] = min;
-		maxval[addr_offs] = max;
-		addr_offs += blockDim.x*gridDim.x;
-	}
-}
-
-__global__ void par_alg_thrust(thrust::device_ptr<double> matrix_ptr, double *minval, double *maxval, int arrlen, int window_size){
-	int tid = threadIdx.x,
-		bid = blockIdx.x;
-	assert(window_size >= MIN_WIN_SIZE);
-
-	int addr_offs = tid + bid*blockDim.x;
-	while(addr_offs+window_size < arrlen + 1) {
-		thrust::detail::normal_iterator< thrust::device_ptr<double> > minimum = thrust::min_element(thrust::device, matrix_ptr+addr_offs, matrix_ptr+addr_offs+window_size);
-		thrust::detail::normal_iterator< thrust::device_ptr<double> > maximum = thrust::max_element(thrust::device, matrix_ptr+addr_offs, matrix_ptr+addr_offs+window_size);
-		
-		double max = maximum[0],
-			   min = minimum[0];
 		assert(minval[addr_offs] == 0.0); //shows if there is overlapping
 		minval[addr_offs] = min;
 		maxval[addr_offs] = max;

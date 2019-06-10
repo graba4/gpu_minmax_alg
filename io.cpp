@@ -61,7 +61,7 @@ void process_args(int argc, char *argv[], io_info *info){
 			    }
 		    	opt_cnt+=1;
 				a_opt = true;
-		    break;
+		    	break;
 
 		    case 'w':
 		    	opt_int = strtol(optarg, &endptr, 10);
@@ -171,7 +171,10 @@ void process_output(io_info *info){
 	for (int i = 0; i < info->revisions; ++i)
 	{
 		average_gpu += info->durations_gpu[i];
+		//printf("gpu time: %.2f\n", info->durations_gpu[i]);
 		average_cpu += info->durations_cpu[i];
+		//printf("cpu time: %.2f\n", info->durations_cpu[i]);
+
 	}
 	average_gpu = average_gpu/info->revisions;
 	average_cpu = average_cpu/info->revisions;

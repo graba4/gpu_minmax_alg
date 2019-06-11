@@ -153,6 +153,8 @@ void process_args(int argc, char *argv[], io_info *info){
 		error_exit(1, usage_str);
 	}
 
+	info->a_opt = a_opt;
+
 	if (!t_opt) 
 		info->t_opt = 1;
 

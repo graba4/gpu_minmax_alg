@@ -19,7 +19,6 @@ typedef struct cuda_matrix
 
 cuda_matrix* allocate_recources(io_info *info, int run_nr);
 cuda_matrix* allocate_recources_streams(io_info *info, int run_nr);
-cuda_matrix* allocate_recources_thrust(io_info *info, int run_nr);
 void free_matrix(cuda_matrix *matrix);
 void print_dev_info();
 void print_matrix(double *matrix, int length);

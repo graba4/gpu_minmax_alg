@@ -37,8 +37,10 @@ __global__ void par_alg_thrust(thrust::device_ptr<double> matrix, double *minval
 
 __device__ void print_matrixx(double *matrix, int length);
 
+
 struct arbitrary_functor
 {
+	//using namespace thrust;
 	int window_size;
     template <typename Tuple>
     __host__ __device__
@@ -80,7 +82,6 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 	assert(max_sm >= blocks);
 
 	checkCudaErrors(cudaDeviceSynchronize());
-	StartTimer();
 	clock_t begin = clock();
 	{
 		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
@@ -91,7 +92,6 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 		checkCudaErrors(error);
 	};
 
-	double time = GetTimer()/1000;
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
@@ -106,56 +106,33 @@ double thrust_approach(cuda_matrix *matrix) {
 	cudaDeviceProp prop;
 	checkCudaErrors(cudaGetDeviceProperties(&prop, DEV_ID));
 
-	int thrust_core_count = matrix->core_count;
-	int thrust_thread_count = matrix->thread_count;
-	int thrust_window_size = matrix->window_size;
-	int thrust_arrlen = matrix->arrlen;
-
-	int blocks = thrust_core_count,
-		threads = thrust_thread_count,
-		max_threads = prop.maxThreadsPerBlock,
-		max_sm = prop.multiProcessorCount;
-
-	assert(max_threads >= threads);
-	assert(max_sm >= blocks);
-
-	assert(thrust_window_size >= MIN_WIN_SIZE);
+	assert(matrix->window_size >= MIN_WIN_SIZE);
 
 	checkCudaErrors(cudaDeviceSynchronize());
-	StartTimer();
-  	arbitrary_functor arb;
-  	arb.window_size = thrust_window_size;
+	clock_t begin = clock();
+	{
+	  	arbitrary_functor arb;
+	  	arb.window_size = matrix->window_size;
+	  	
+	  	device_ptr<double> d_first = device_pointer_cast(matrix->d_matrix);
+	  	device_ptr<double> d_last = device_pointer_cast(matrix->d_matrix) + matrix->arrlen - matrix->window_size + 1;
+	  	device_ptr<double> min_first = device_pointer_cast(matrix->d_minval);
+	  	device_ptr<double> min_last = device_pointer_cast(matrix->d_minval) + matrix->arrlen - matrix->window_size + 1;
+	  	device_ptr<double> max_first = device_pointer_cast(matrix->d_maxval);
+	  	device_ptr<double> max_last = device_pointer_cast(matrix->d_maxval) + matrix->arrlen - matrix->window_size + 1;
 
-  	device_vector<double> thrust_minval(thrust_arrlen);
-	device_vector<double> thrust_maxval(thrust_arrlen);
+		for_each(make_zip_iterator(make_tuple(d_first, min_first, max_first)),
+				 make_zip_iterator(make_tuple(d_last, min_last, max_last)),
+				 arb
+		);
+		checkCudaErrors(cudaDeviceSynchronize());
+	};
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-  	device_ptr<double> matrix_ptr = device_pointer_cast(matrix->d_matrix);
-  	
-  	device_ptr<double> d_first = device_pointer_cast(matrix->d_matrix);
-  	device_ptr<double> d_last = device_pointer_cast(matrix->d_matrix) + thrust_arrlen - thrust_window_size + 1;
-  	device_ptr<double> min_first = thrust_minval.data();
-  	device_ptr<double> min_last = thrust_minval.data() + thrust_arrlen - thrust_window_size + 1;
-  	device_ptr<double> max_first = thrust_maxval.data();
-  	device_ptr<double> max_last = thrust_maxval.data() + thrust_arrlen - thrust_window_size + 1;
+	printf("Cuda thrust alg time: %f\n", time_spent);	
 
-	for_each(
-		make_zip_iterator(make_tuple(d_first, min_first, max_first)),
-		make_zip_iterator(make_tuple(d_last, min_last, max_last)),
-		arb
-	);
-
-	checkCudaErrors(cudaDeviceSynchronize());
-	//what is that??
-	copy(thrust_minval.begin(), thrust_minval.end(), device_pointer_cast(matrix->d_minval));
-	copy(thrust_maxval.begin(), thrust_maxval.end(), device_pointer_cast(matrix->d_maxval));
-
-	cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-	checkCudaErrors(error);
-	error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-	checkCudaErrors(error);
-
-	double time = GetTimer()/1000;
-	return time;
+	return time_spent;
 }
 
 double streams_approach(io_info *info, int run_nr) {
@@ -172,29 +149,31 @@ double streams_approach(io_info *info, int run_nr) {
 	
 	cuda_matrix *matrix[4];
 
-	StartTimer();
-	for(int i=0; i < nStreams; ++i) {
-		cudaStreamCreate(&streams[i]);
-		matrix[i] = allocate_recources_streams(info, run_nr); //this needs to be changed, in create_matrix we should do cudaMemcpyAsync instead of cudaMemcpy
-		blocks = matrix[i]->core_count;
-		threads = matrix[i]->thread_count;
-	}
-	for(int i=0; i < nStreams; ++i) {
-		par_alg_inc_blocks<<<blocks, threads, 0, streams[i]>>>(matrix[i]->d_matrix, matrix[i]->d_minval, matrix[i]->d_maxval, matrix[i]->arrlen, matrix[i]->window_size);
-	}
-	for(int i=0; i < nStreams; ++i) {
-		error = cudaMemcpyAsync(matrix[i]->h_minval, matrix[i]->d_minval, matrix[i]->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
-	}
-	double time = GetTimer()/1000;
+	clock_t begin = clock();
+	{
+		for(int i=0; i < nStreams; ++i) {
+			cudaStreamCreate(&streams[i]);
+			matrix[i] = allocate_recources_streams(info, run_nr); //this needs to be changed, in create_matrix we should do cudaMemcpyAsync instead of cudaMemcpy
+			blocks = matrix[i]->core_count;
+			threads = matrix[i]->thread_count;
+		}
+		for(int i=0; i < nStreams; ++i) {
+			par_alg_inc_blocks<<<blocks, threads, 0, streams[i]>>>(matrix[i]->d_matrix, matrix[i]->d_minval, matrix[i]->d_maxval, matrix[i]->arrlen, matrix[i]->window_size);
+		}
+		for(int i=0; i < nStreams; ++i) {
+			error = cudaMemcpyAsync(matrix[i]->h_minval, matrix[i]->d_minval, matrix[i]->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
+			checkCudaErrors(error);
+		}
+	};
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
 	for (int i=0; i<nStreams; ++i) {
 		free_matrix(matrix[i]);
 	}
 
-
-	printf("Time: %f\n", time);	
-	return time;
+	printf("Cuda streams alg time: %f\n", time_spent);	
+	return time_spent;
 }
 
 double sequential_approach(cuda_matrix *matrix){

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 __global__ void print_ref(double *ref, int len);
-cuda_matrix* allocate_recources(io_info *info);
+cuda_matrix* allocate_resources(io_info *info);
 void free_matrix(double *matrix);
 void free_matrix(cuda_matrix *matrix);
 void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int seed);
@@ -14,7 +14,7 @@ void print_matrix(double *matrix, int length);
 void gen_reference(cuda_matrix *matrix, double *h_matrix, int length);
 void print_dev_info();
 
-cuda_matrix* allocate_recources(io_info *info, int run_nr)
+cuda_matrix* allocate_resources(io_info *info, int run_nr)
 {
 	clock_t both_begin = clock();
 	int arrlen = info->v_opt;
@@ -61,7 +61,7 @@ cuda_matrix* allocate_recources(io_info *info, int run_nr)
 	return matrix;
 }
 
-cuda_matrix* allocate_recources_streams(io_info *info, int run_nr)
+cuda_matrix* allocate_resources_streams(io_info *info, int run_nr)
 {
 	clock_t both_begin = clock();
 	int arrlen = info->v_opt;

@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case 2: //thrust parallel
-				matrix = allocate_recources(&info, info.run_nr);
+				matrix = allocate_recources_thrust(&info, info.run_nr);
 				//printf("%.1f\n", thrust_approach(matrix));
 				info.durations_gpu[info.run_nr] += thrust_approach(matrix);
 				break;

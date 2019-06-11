@@ -85,11 +85,6 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 	clock_t begin = clock();
 	{
 		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
-		checkCudaErrors(cudaDeviceSynchronize());
-		cudaError error = cudaMemcpy(matrix->h_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
-		error = cudaMemcpy(matrix->h_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
-		checkCudaErrors(error);
 	};
 
 	clock_t end = clock();

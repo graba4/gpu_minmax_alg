@@ -81,7 +81,6 @@ bool verify(cuda_matrix *matrix){
 	assert(matrix->d_minval != NULL);
 	assert(matrix->d_maxval != NULL);
 
-
 	cudaError error;
 	error = cudaMemcpy(cuda_minval, matrix->d_minval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
 	checkCudaErrors(error);

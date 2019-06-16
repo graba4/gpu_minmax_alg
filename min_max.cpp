@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 	{
 		cuda_matrix *matrix;
 		switch(info.i_opt){
-			case 0: //cuda synch parallel
+			case 0: //cuda parallel
 				matrix = allocate_resources(&info, info.run_nr);
 				info.durations_gpu[info.run_nr] += cuda_parallel_approach(matrix);
 				break;
@@ -48,12 +48,13 @@ int main(int argc, char *argv[])
 
 			case 2: //thrust parallel
 				matrix = allocate_resources(&info, info.run_nr);
+				//printf("%.1f\n", thrust_approach(matrix));
 				info.durations_gpu[info.run_nr] += thrust_approach(matrix);
 				break;
 			
-			case 3: //cuda streams parallel
+			case 3: //not implemented
 				matrix = allocate_resources_streams(&info, info.run_nr);
-				info.durations_gpu[info.run_nr] += streams_approach(&info, info.run_nr);
+				info.durations_gpu[info.run_nr] += streams_approach(matrix);
 				break;
 
 			case 4:

@@ -4,6 +4,74 @@
 		"selected_items":
 		[
 			[
+				"str",
+				"stream0"
+			],
+			[
+				"cudaStre",
+				"cudaStreamSynchronize\tcudaStreamSynchronize"
+			],
+			[
+				"thre",
+				"thread_count"
+			],
+			[
+				"CUDAME",
+				"cudaMemcpyDeviceToHost"
+			],
+			[
+				"size",
+				"size_t"
+			],
+			[
+				"h_",
+				"h_matrix"
+			],
+			[
+				"matr",
+				"matrix-"
+			],
+			[
+				"d_ma",
+				"d_matrix"
+			],
+			[
+				"mat",
+				"matrix-"
+			],
+			[
+				"cuda",
+				"cudaMemcpy\tcudaMemcpy"
+			],
+			[
+				"cudaCreate",
+				"cudaStreamCreate\tcudaStreamCreate"
+			],
+			[
+				"ma",
+				"matrix-"
+			],
+			[
+				"time",
+				"time"
+			],
+			[
+				"err",
+				"error"
+			],
+			[
+				"h_ma",
+				"h_matrix"
+			],
+			[
+				"Cuda",
+				"cudaError"
+			],
+			[
+				"error",
+				"checkCudaErrors"
+			],
+			[
 				"th",
 				"thrust"
 			],
@@ -36,28 +104,12 @@
 				"for\tFor Loop"
 			],
 			[
-				"h_ma",
-				"h_maxval"
-			],
-			[
-				"h_",
-				"h_minval"
-			],
-			[
 				"block",
 				"blockIdx\tblockIdx"
 			],
 			[
-				"cuda",
-				"cuda_minval"
-			],
-			[
 				"cu",
 				"cudaMemcpy\tcudaMemcpy"
-			],
-			[
-				"time",
-				"time_spent"
 			],
 			[
 				"ti",
@@ -256,10 +308,6 @@
 				"block_size"
 			],
 			[
-				"thre",
-				"threads"
-			],
-			[
 				"__",
 				"__s\t__syncthreads()"
 			],
@@ -282,10 +330,6 @@
 			[
 				"nai",
 				"naive_aproach"
-			],
-			[
-				"err",
-				"errors"
 			],
 			[
 				"b",
@@ -360,10 +404,6 @@
 				"durations"
 			],
 			[
-				"ma",
-				"matrix"
-			],
-			[
 				"free",
 				"free_matrix"
 			],
@@ -390,10 +430,6 @@
 			[
 				"NV",
 				"NVCCFLAGS"
-			],
-			[
-				"str",
-				"STRLEN"
 			],
 			[
 				"host",
@@ -478,55 +514,17 @@
 			[
 				"el",
 				"else"
-			],
-			[
-				"of",
-				"ofs"
-			],
-			[
-				"inf",
-				"mapid_info"
-			],
-			[
-				"mapi",
-				"mapid_t"
-			],
-			[
-				"page",
-				"pages"
-			],
-			[
-				"bytes",
-				"bytes_written"
-			],
-			[
-				"user",
-				"user_buffer"
-			],
-			[
-				"sys",
-				"syscall_mmap"
-			],
-			[
-				"syscall_m",
-				"syscall_mmap"
-			],
-			[
-				"syscall_mm",
-				"syscall_munmap"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "#include <stdio.h>\n#include <strings.h>\n#include <string.h>\n#include <stdbool.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include \"io.h\"\n#include \"errors.h\"\n#include \"implementations.h\"\n#include \"implementations_cpu.h\"\n#include <assert.h>\n#include \"resources.h\"\n\nint main(int argc, char *argv[])\n{\n\tio_info info; // = {0, 0, 0, 0, 0, 0, 0, NULL};\n\n\tprocess_args(argc, argv, &info);\n\tdouble gpu_dur[info.revisions];\n\tinfo.durations_gpu = gpu_dur;\n\tdouble cpu_dur[info.revisions];\n\tinfo.durations_cpu = cpu_dur;\n\tfor (int i = 0; i < info.revisions; ++i)\n\t\tinfo.durations_gpu[i] = info.durations_cpu[i] = 0;\n\n\t//print_dev_info();\n\n\t/*\n\tprintf(\"arrlen: %d\\n\", info.v_opt);\n\tprintf(\"SM cores: %d\\n\", info.c_opt);\n\tprintf(\"cuda cores: %d\\n\", info.t_opt);\n\tprintf(\"implementation: %d\\n\", info.i_opt);\n\tprintf(\"revisions: %d\\n\", info.revisions);\n\t*/\n\tfor (info.run_nr = 0; info.run_nr < info.revisions; ++info.run_nr)\n\t{\n\t\tcuda_matrix *matrix;\n\t\tswitch(info.i_opt){\n\t\t\tcase 0: //cuda parallel\n\t\t\t\tmatrix = allocate_recources(&info, info.run_nr);\n\t\t\t\tinfo.durations_gpu[info.run_nr] += cuda_parallel_approach(matrix);\n\t\t\t\tbreak;\n\n\t\t\tcase 1: //cuda sequential\n\t\t\t\tmatrix = allocate_recources(&info, info.run_nr);\n\t\t\t\tinfo.durations_gpu[info.run_nr] += sequential_approach(matrix);\n\t\t\t\tbreak;\n\n\t\t\tcase 2: //thrust parallel\n\t\t\t\tmatrix = allocate_recources_thrust(&info, info.run_nr);\n\t\t\t\t//printf(\"%.1f\\n\", thrust_approach(matrix));\n\t\t\t\tinfo.durations_gpu[info.run_nr] += thrust_approach(matrix);\n\t\t\t\tbreak;\n\t\t\t\n\t\t\tcase 3: //not implemented\n\t\t\t\tmatrix = allocate_recources(&info, info.run_nr);\n\t\t\t\tinfo.durations_gpu[info.run_nr] = streams_approach(&info, info.run_nr);\n\t\t\t\tbreak;\n\n\t\t\tcase 4:\n\t\t\t\tbreak;\n\n\t\t\tdefault:\n\t\t\t\terror_exit(2, (char *)\"Invalid implemetation Nr.\");\n\t\t}\n\t\tinfo.durations_cpu[info.run_nr] += min_max_cpu(matrix);\n\t\t//assert(verify(matrix));\n\n\t\tfree_matrix(matrix);\n\t}\n\n\tprocess_output(&info);\n\n\treturn 0;\n}\n",
 			"file": "min_max.cpp",
-			"file_size": 1910,
-			"file_write_time": 132046502870000000,
 			"settings":
 			{
-				"buffer_size": 1917,
+				"buffer_size": 1907,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -534,16 +532,7 @@
 			"file": "resources.cu",
 			"settings":
 			{
-				"buffer_size": 7368,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources.h",
-			"settings":
-			{
-				"buffer_size": 682,
+				"buffer_size": 5944,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -552,7 +541,7 @@
 			"file": "io.cpp",
 			"settings":
 			{
-				"buffer_size": 4539,
+				"buffer_size": 4562,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -561,7 +550,43 @@
 			"file": "implementations.cu",
 			"settings":
 			{
-				"buffer_size": 9265,
+				"buffer_size": 7728,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "implementations_cpu.cu",
+			"settings":
+			{
+				"buffer_size": 2592,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Cuda took: 8.530000 seconds\nCPU took: 2.650000 seconds",
+			"settings":
+			{
+				"buffer_size": 54,
+				"line_ending": "Unix",
+				"name": "Cuda took: 8.530000 seconds"
+			}
+		},
+		{
+			"file": "resources.h",
+			"settings":
+			{
+				"buffer_size": 615,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1207,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -576,48 +601,22 @@
 			}
 		},
 		{
-			"file": "implementations_cpu.h",
+			"file": "implementations.h",
 			"settings":
 			{
-				"buffer_size": 165,
-				"encoding": "UTF-8",
+				"buffer_size": 276,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "fabian_thesis/project/implementations_cpu.cpp",
+			"contents": "implementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [3,0,0], thread: [0,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [3,0,0], thread: [1,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [3,0,0], thread: [2,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [2,0,0], thread: [0,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [2,0,0], thread: [1,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [2,0,0], thread: [2,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [0,0,0], thread: [0,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [0,0,0], thread: [1,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nimplementations.cu:258: void par_alg_inc_blocks(double *, do\nuble *, double *, int, int): block: [0,0,0], thread: [2,0,0]\n Assertion `minval[addr_offs] == 0.0` failed.               \nCUDA error at resources.cu:141 code=710(cudaErrorAssert) \"er\nror\"                                                        \nmake: *** [check] Fehler 1                                  \n[mirza@herz gpu_minmax_alg]$ make                           \n./min_max -v 1000 -w 3 -c 4 -i 3 -t 3                       \nCuda took: 6.040000 seconds                                 \nCPU took: 6.040000 seconds                                  \n1000,3,4,6.04,6.04,3,1560546250                             \n[mirza@herz gpu_minmax_alg]$                                \n",
 			"settings":
 			{
-				"buffer_size": 3449,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "cuda_deque.h",
-			"settings":
-			{
-				"buffer_size": 508,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "fabian@fabian-laptop:~/Schreibtisch/gpu/cuda/gpu_minmax_alg$   \n                                                               \n                                                               \n                                                               \n                                                               \n                                                               \n                                                               \n                                                               \n                                                               \n                                                               \n",
-			"settings":
-			{
-				"buffer_size": 640,
+				"buffer_size": 2196,
 				"line_ending": "Unix",
 				"name": "Terminal (bash)",
 				"read_only": true,
 				"scratch": true
-			}
-		},
-		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 1213,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -730,13 +729,17 @@
 	],
 	"file_history":
 	[
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/resources.h",
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/cuda_deque.h",
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/implementations_cpu.h",
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/implementations.h",
+		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/fabian_thesis/project/implementations_cpu.cpp",
 		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/implementations_cpu.cu",
 		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/errors.cpp",
 		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/common/inc/timer.h",
 		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/io.cpp",
 		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/resources.cu",
 		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/cuda_deque.cu",
-		"/home/fabian/Schreibtisch/gpu/cuda/gpu_minmax_alg/fabian_thesis/project/implementations_cpu.cpp",
 		"/home/fabian/Schreibtisch/gpu/gpu_minmax_alg/min_max.cpp",
 		"/home/fabian/Schreibtisch/gpu/gpu_minmax_alg/min_max",
 		"/home/fabian/Dokumente/gpu_minmax_alg/io.cpp",
@@ -853,11 +856,7 @@
 		"/home/fabian/dokumente/betriebssysteme/Makefile",
 		"/home/fabian/dokumente/betriebssysteme/3/Makefile",
 		"/home/fabian/dokumente/betriebssysteme/3/battleships/Makefile",
-		"/home/fabian/dokumente/betriebssysteme/2/rshutdown.c",
-		"/home/fabian/dokumente/bak-arbeit/project/bac_thes.sublime-project",
-		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/hash.h",
-		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.h",
-		"/home/fabian/dokumente/progos/gruppe/pintos-progos/lib/kernel/list.c"
+		"/home/fabian/dokumente/betriebssysteme/2/rshutdown.c"
 	],
 	"find":
 	{
@@ -875,6 +874,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"* allocate_resources",
+			"stream",
+			"hostal",
+			"malloc",
 			"max_threads",
 			"par_alg_thrust",
 			"thrust::",
@@ -937,7 +940,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -946,15 +949,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1917,
+						"buffer_size": 1907,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1495,
-								1495
+								1336,
+								1336
 							]
 						],
 						"settings":
@@ -962,11 +965,11 @@
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 65.0,
-						"translation.y": 882.0,
+						"translation.x": 0.0,
+						"translation.y": 567.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -975,65 +978,37 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7368,
+						"buffer_size": 5944,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2368,
-								2368
+								3107,
+								3107
 							]
 						],
 						"settings":
 						{
+							"history_list_is_closing": true,
 							"syntax": "Packages/CUDA Snippets/cuda-c++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 1351.0,
+						"translation.x": 5.0,
+						"translation.y": 1287.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "resources.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 682,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								357,
-								357
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "io.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4539,
+						"buffer_size": 4562,
 						"regions":
 						{
 						},
@@ -1051,33 +1026,57 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 262.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "implementations.cu",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9265,
+						"buffer_size": 7728,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4518,
-								4518
+								4680,
+								4680
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/CUDA Snippets/cuda-c++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 126.0,
+						"translation.y": 3201.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "implementations_cpu.cu",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2592,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1964,
+								1964
 							]
 						],
 						"settings":
@@ -1087,149 +1086,32 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3078.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "resources.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 682,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								537,
-								537
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 330.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "io.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 332,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								100,
-								100
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 75.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "implementations_cpu.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 165,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								73,
-								73
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1648.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "fabian_thesis/project/implementations_cpu.cpp",
+					"buffer": 5,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3449,
+						"buffer_size": 54,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1374,
-								1374
+								54,
+								54
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 134.0,
-						"translation.y": 1204.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "cuda_deque.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 508,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"auto_name": "Cuda took: 8.530000 seconds",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1245,19 +1127,141 @@
 			"sheets":
 			[
 				{
-					"buffer": 9,
+					"buffer": 6,
+					"file": "resources.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 640,
+						"buffer_size": 615,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								61,
-								61
+								470,
+								470
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 62.0,
+						"translation.y": 174.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1207,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1179,
+								1179
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1069.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "io.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 332,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "implementations.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 10,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2196,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2164,
+								2164
 							]
 						],
 						"settings":
@@ -1284,8 +1288,8 @@
 							},
 							"terminal_view_last_cursor_pos":
 							[
-								0,
-								61
+								35,
+								29
 							],
 							"word_wrap": false
 						},
@@ -1293,24 +1297,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 7,
 					"file": "Makefile",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1213,
+						"buffer_size": 1207,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1167,
-								1167
+								1156,
+								1156
 							]
 						],
 						"settings":
@@ -1319,10 +1323,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 907.0,
+						"translation.y": 825.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1362,13 +1366,13 @@
 		"cols":
 		[
 			0.0,
-			0.464278397052,
+			0.49072969307,
 			1.0
 		],
 		"rows":
 		[
 			0.0,
-			0.712643414909,
+			0.0785139810646,
 			1.0
 		]
 	},
@@ -1395,20 +1399,24 @@
 		"selected_items":
 		[
 			[
+				"res",
+				"resources.h"
+			],
+			[
+				"imp",
+				"implementations.h"
+			],
+			[
+				"mak",
+				"Makefile"
+			],
+			[
 				"impl",
 				"fabian_thesis/project/implementations_cpu.cpp"
 			],
 			[
-				"imp",
-				"implementations_cpu.h"
-			],
-			[
 				"io",
 				"io.cpp"
-			],
-			[
-				"res",
-				"resources.cu"
 			],
 			[
 				"imple",
@@ -1439,7 +1447,7 @@
 		],
 		"width": 392.0
 	},
-	"selected_group": 0,
+	"selected_group": 2,
 	"settings":
 	{
 	},

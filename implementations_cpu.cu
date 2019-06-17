@@ -86,9 +86,10 @@ bool verify(cuda_matrix *matrix){
 	checkCudaErrors(error);
 	error = cudaMemcpy(cuda_maxval, matrix->d_maxval, matrix->arrlen*sizeof(double), cudaMemcpyDeviceToHost);
 	checkCudaErrors(error);
+	
 	//print_matrix(matrix->h_matrix, matrix->arrlen);
 	//print_matrix(cuda_minval, matrix->arrlen);
-	//print_matrix(matrix->h_maxval, matrix->arrlen);
+	//print_matrix(matrix->h_minval, matrix->arrlen);
 
 	for(int i = 0; i < matrix->arrlen; ++i) {
 		if (cuda_minval[i] != matrix->h_minval[i]){

@@ -87,7 +87,7 @@ cuda_matrix* allocate_resources_streams(io_info *info, int run_nr)
 
 	clock_t gpu_begin = clock();
 	cudaError error;
-	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*arrlen);
+	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*8);
 	checkCudaErrors(error);
 
 	error = cudaMalloc(&(matrix->d_minval), sizeof(double)*arrlen);

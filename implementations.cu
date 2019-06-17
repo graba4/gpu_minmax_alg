@@ -63,7 +63,7 @@ __device__ void print_matrixx(double *matrix, int length)
 	if(blockIdx.x == 0 && threadIdx.x == 0){
 		/* image row */
 		for (int i = 0; i < length; i++){
-			printf("%.1f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
+			printf("%.0f ", (matrix[i] == -0.0)? 0.0 : matrix[i]);
 		}
 		printf("\n");
 	}
@@ -89,7 +89,6 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
 	printf("Cuda synchronize alg time: %f\n", time_spent);	
 
 	return time_spent;
@@ -130,7 +129,6 @@ double thrust_approach(cuda_matrix *matrix) {
 	return time_spent;
 }
 
-#define CHUNK_SIZE (1000)
 double streams_approach(cuda_matrix *matrix) {
 	cudaError error;
 	//cudaDeviceProp prop;
@@ -143,15 +141,30 @@ double streams_approach(cuda_matrix *matrix) {
 	cudaStream_t stream0, stream1;
 	error = cudaStreamCreate(&stream0);
 	checkCudaErrors(error);
+	error = cudaMalloc(&matrix->d_minval_streams, sizeof(double)*matrix->window_size);
+	checkCudaErrors(error);
+	error = cudaMalloc(&matrix->d_maxval_streams, sizeof(double)*matrix->window_size);
+	checkCudaErrors(error);
 	
-	for (int i = 0; i < matrix->arrlen; i+=CHUNK_SIZE)
+	size_t offset = 0;
+	print_matrix(matrix->h_matrix, matrix->arrlen);
+	for (int i = 0; i < matrix->arrlen; i+=8)
 	{
-		size_t data_size = (matrix->arrlen-i < CHUNK_SIZE) ? matrix->arrlen-i : CHUNK_SIZE;
-		cudaMemcpyAsync(matrix->d_matrix, matrix->h_matrix, data_size, cudaMemcpyHostToDevice, stream0);
-		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
+		size_t data_size = (matrix->arrlen-i < 8) ? matrix->arrlen-i : 8;
+
+		error = cudaMemcpyAsync(matrix->d_matrix, matrix->h_matrix+i, data_size, cudaMemcpyHostToDevice, stream0);
+		checkCudaErrors(error);
+		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix, matrix->d_minval_streams, matrix->d_maxval_streams, data_size, matrix->window_size);
+		/*error = cudaMemcpyAsync(matrix->d_minval+offset, matrix->d_minval_streams, data_size, cudaMemcpyDeviceToDevice, stream0);
+		checkCudaErrors(error);
+		error = cudaMemcpyAsync(matrix->d_maxval+offset, matrix->d_maxval_streams, data_size, cudaMemcpyDeviceToDevice, stream0);
+		checkCudaErrors(error);
+	*/
+		offset+=data_size;
 	}
 
 	cudaStreamSynchronize(stream0);
+
 	
 	return time;
 }
@@ -243,6 +256,7 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 	int tid = threadIdx.x,
 		bid = blockIdx.x;
 	assert(window_size >= MIN_WIN_SIZE);
+	print_matrixx(matrix, arrlen);
 
 	int addr_offs = tid + bid*blockDim.x;
 	while(addr_offs+window_size < arrlen + 1) {
@@ -255,9 +269,12 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 			min = (matrix[i] < min)? matrix[i] : min;
 			max = (matrix[i] > max)? matrix[i] : max;
 		}
-		assert(minval[addr_offs] == 0.0); //shows if there is overlapping
+		//assert(minval[addr_offs] == 0.0); //shows if there is overlapping
+		//assert(maxval[addr_offs] == 0.0); //shows if there is overlapping
+
 		minval[addr_offs] = min;
 		maxval[addr_offs] = max;
 		addr_offs += blockDim.x*gridDim.x;
 	}
+
 }

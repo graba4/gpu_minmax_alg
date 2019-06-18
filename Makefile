@@ -45,7 +45,7 @@ resources.o: resources.cu
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
 check:
-	cuda-memcheck ./min_max -v 15 -w 3 -c 1 -i 3 -t 1
+	./min_max -v 15000000 -w 3 -c 1 -i 2 -t 10 -r 2 -a
 
 clean:
 	rm -f min_max *.o

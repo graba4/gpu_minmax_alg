@@ -64,7 +64,8 @@ int main(int argc, char *argv[])
 				error_exit(2, (char *)"Invalid implemetation Nr.");
 		}
 		info.durations_cpu[info.run_nr] += min_max_cpu(matrix);
-		//assert(verify(matrix));
+		if(!verify(matrix))
+			printf("verification failed\n");
 
 		free_matrix(matrix);
 	}

@@ -87,7 +87,7 @@ cuda_matrix* allocate_resources_streams(io_info *info, int run_nr)
 
 	clock_t gpu_begin = clock();
 	cudaError error;
-	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*8);
+	error = cudaMalloc(&(matrix->d_matrix), sizeof(double)*arrlen);
 	checkCudaErrors(error);
 
 	error = cudaMalloc(&(matrix->d_minval), sizeof(double)*arrlen);
@@ -115,9 +115,9 @@ void create_matrix(cuda_matrix *matrix, int arrlen, bool clear, unsigned int see
 		h_matrix = (double *)calloc(arrlen, sizeof(double));
 		assert(h_matrix != NULL);
 	} else {
-		//h_matrix = (double *)malloc(sizeof(double) * arrlen);
-		cudaError error = cudaHostAlloc(&h_matrix, sizeof(double) * arrlen, cudaHostAllocDefault);
-		checkCudaErrors(error);
+		h_matrix = (double *)malloc(sizeof(double) * arrlen);
+		//cudaError error = cudaHostAlloc(&h_matrix, sizeof(double) * arrlen, cudaHostAllocDefault);
+		//checkCudaErrors(error);
 		assert(h_matrix != NULL);
 		seed = (seed==0)? time(NULL) : seed;
 		matrix->seed = seed;
@@ -145,9 +145,9 @@ void free_matrix(cuda_matrix *matrix)
 	checkCudaErrors(error);
 	free(matrix->h_maxval);
 	free(matrix->h_minval);
-	//free(matrix->h_matrix);
-	error = cudaFreeHost(matrix->h_matrix);
-	checkCudaErrors(error);
+	free(matrix->h_matrix);
+	//error = cudaFreeHost(matrix->h_matrix);
+	//checkCudaErrors(error);
 
 
 	//error = cudaFree(matrix->d_solution);

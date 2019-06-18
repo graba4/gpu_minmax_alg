@@ -25,7 +25,7 @@
 
 
 #define ROUND_UP(N, S) (N%S == 0) ? N/S : N/S+1
-#define BETWEEN(value, min, max) (value < max && value > min)
+#define BETWEEN(value, min, max) (value <= max && value >= min)
 #define DEV_ID (0)
 #define MIN_WIN_SIZE (3)
 
@@ -36,7 +36,7 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 __global__ void par_alg_thrust(thrust::device_ptr<double> matrix, double *minval, double *maxval, int arrlen, int window_size);
 
 __device__ void print_matrixx(double *matrix, int length);
-
+__global__ void cuda_print_arr(double *arr, size_t len);
 
 struct arbitrary_functor
 {
@@ -82,14 +82,13 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 	assert(max_sm >= blocks);
 
 	checkCudaErrors(cudaDeviceSynchronize());
-	clock_t begin = clock();
+	StartTimer();
 	{
 		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 	};
 
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	printf("Cuda synchronize alg time: %f\n", time_spent);	
+	
+	double time_spent = GetTimer()/1000;
 
 	return time_spent;
 }
@@ -103,7 +102,7 @@ double thrust_approach(cuda_matrix *matrix) {
 	assert(matrix->window_size >= MIN_WIN_SIZE);
 
 	checkCudaErrors(cudaDeviceSynchronize());
-	clock_t begin = clock();
+	StartTimer();
 	{
 	  	arbitrary_functor arb;
 	  	arb.window_size = matrix->window_size;
@@ -121,10 +120,8 @@ double thrust_approach(cuda_matrix *matrix) {
 		);
 		checkCudaErrors(cudaDeviceSynchronize());
 	};
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	double time_spent = GetTimer()/1000;
 
-	printf("Cuda thrust alg time: %f\n", time_spent);	
 
 	return time_spent;
 }
@@ -141,31 +138,20 @@ double streams_approach(cuda_matrix *matrix) {
 	cudaStream_t stream0, stream1;
 	error = cudaStreamCreate(&stream0);
 	checkCudaErrors(error);
-	error = cudaMalloc(&matrix->d_minval_streams, sizeof(double)*matrix->window_size);
-	checkCudaErrors(error);
-	error = cudaMalloc(&matrix->d_maxval_streams, sizeof(double)*matrix->window_size);
-	checkCudaErrors(error);
-	
-	size_t offset = 0;
+
 	print_matrix(matrix->h_matrix, matrix->arrlen);
-	for (int i = 0; i < matrix->arrlen; i+=8)
+	for (int i = 0; i < matrix->arrlen; i+=CHUNK_SIZE)
 	{
-		size_t data_size = (matrix->arrlen-i < 8) ? matrix->arrlen-i : 8;
+		size_t data_size = (matrix->arrlen-i < CHUNK_SIZE) ? matrix->arrlen-i : CHUNK_SIZE;
 
-		error = cudaMemcpyAsync(matrix->d_matrix, matrix->h_matrix+i, data_size, cudaMemcpyHostToDevice, stream0);
+		error = cudaMemcpyAsync(matrix->d_matrix+i, (matrix->h_matrix)+i, data_size*sizeof(double), cudaMemcpyHostToDevice, stream0);
 		checkCudaErrors(error);
-		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix, matrix->d_minval_streams, matrix->d_maxval_streams, data_size, matrix->window_size);
-		/*error = cudaMemcpyAsync(matrix->d_minval+offset, matrix->d_minval_streams, data_size, cudaMemcpyDeviceToDevice, stream0);
-		checkCudaErrors(error);
-		error = cudaMemcpyAsync(matrix->d_maxval+offset, matrix->d_maxval_streams, data_size, cudaMemcpyDeviceToDevice, stream0);
-		checkCudaErrors(error);
-	*/
-		offset+=data_size;
+		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, data_size, matrix->window_size);
+
+		cuda_print_arr<<<1, 1, 0, stream0>>>(matrix->d_minval, matrix->arrlen);
 	}
-
 	cudaStreamSynchronize(stream0);
 
-	
 	return time;
 }
 
@@ -256,7 +242,6 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 	int tid = threadIdx.x,
 		bid = blockIdx.x;
 	assert(window_size >= MIN_WIN_SIZE);
-	print_matrixx(matrix, arrlen);
 
 	int addr_offs = tid + bid*blockDim.x;
 	while(addr_offs+window_size < arrlen + 1) {
@@ -277,4 +262,9 @@ __global__ void par_alg_inc_blocks(double *matrix, double *minval, double *maxva
 		addr_offs += blockDim.x*gridDim.x;
 	}
 
+	//print_matrixx(minval, 15);
+}
+
+__global__ void cuda_print_arr(double *arr, size_t len){
+	print_matrixx(arr, len);
 }

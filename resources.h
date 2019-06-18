@@ -2,7 +2,7 @@
 #define RESOURCES_H
 #include "io.h"
 
-#define CHUNK_SIZE (1000)
+#define CHUNK_SIZE (5)
 
 
 typedef struct cuda_matrix
@@ -10,8 +10,6 @@ typedef struct cuda_matrix
 	double *d_matrix, //the array where we want to operate
 		   *d_maxval,
 		   *d_minval,
-		   *d_maxval_streams,
-		   *d_minval_streams,
 		   *h_maxval,
 		   *h_minval,
 		   *h_matrix;

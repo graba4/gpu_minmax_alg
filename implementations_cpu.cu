@@ -22,7 +22,8 @@ double min_max_cpu(cuda_matrix *matrix){
 	double *a = matrix->h_matrix,
 		   *minval = matrix->h_minval,
 		   *maxval = matrix->h_maxval;
-	//print_matrixx(a, arrlen);
+	//print_matrix(a, matrix->arrlen);
+	
 	clock_t begin = clock();
 
 	for(u_int i = 1; i < matrix->arrlen; ++i){

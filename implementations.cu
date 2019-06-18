@@ -83,9 +83,8 @@ double cuda_parallel_approach(cuda_matrix *matrix){
 
 	checkCudaErrors(cudaDeviceSynchronize());
 	StartTimer();
-	{
-		par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
-	};
+	
+	par_alg_inc_blocks<<<blocks, threads>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, matrix->arrlen, matrix->window_size);
 
 	
 	double time_spent = GetTimer()/1000;
@@ -133,25 +132,27 @@ double streams_approach(cuda_matrix *matrix) {
 
 	StartTimer();
 
-	double time = GetTimer()/1000;
 
 	cudaStream_t stream0, stream1;
 	error = cudaStreamCreate(&stream0);
+	error = cudaStreamCreate(&stream1);
 	checkCudaErrors(error);
 
-	print_matrix(matrix->h_matrix, matrix->arrlen);
-	for (int i = 0; i < matrix->arrlen; i+=CHUNK_SIZE)
+	//print_matrix(matrix->h_matrix, matrix->arrlen);
+	for (int i = 0; i < matrix->arrlen; i+=(CHUNK_SIZE - matrix->window_size + 1)*2)
 	{
 		size_t data_size = (matrix->arrlen-i < CHUNK_SIZE) ? matrix->arrlen-i : CHUNK_SIZE;
 
 		error = cudaMemcpyAsync(matrix->d_matrix+i, (matrix->h_matrix)+i, data_size*sizeof(double), cudaMemcpyHostToDevice, stream0);
 		checkCudaErrors(error);
-		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix, matrix->d_minval, matrix->d_maxval, data_size, matrix->window_size);
+		error = cudaMemcpyAsync(matrix->d_matrix+i, (matrix->h_matrix)+i, data_size*sizeof(double), cudaMemcpyHostToDevice, stream0);
+		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix+i, matrix->d_minval+i, matrix->d_maxval+i, data_size, matrix->window_size);
 
-		cuda_print_arr<<<1, 1, 0, stream0>>>(matrix->d_minval, matrix->arrlen);
+		//cuda_print_arr<<<1, 1, 0, stream0>>>(matrix->d_minval, matrix->arrlen);
 	}
 	cudaStreamSynchronize(stream0);
 
+	double time = GetTimer()/1000;
 	return time;
 }
 

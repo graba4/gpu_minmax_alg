@@ -132,25 +132,38 @@ double streams_approach(cuda_matrix *matrix) {
 
 	StartTimer();
 
-
-	cudaStream_t stream0, stream1;
-	error = cudaStreamCreate(&stream0);
-	error = cudaStreamCreate(&stream1);
-	checkCudaErrors(error);
+	size_t stream_cnt = matrix->arrlen/CHUNK_SIZE;
+	cudaStream_t streams[stream_cnt];
+	for(int i = 0; i < stream_cnt; ++i) {
+		error = cudaStreamCreate(&(streams[i]));
+		checkCudaErrors(error);
+	}
 
 	//print_matrix(matrix->h_matrix, matrix->arrlen);
-	for (int i = 0; i < matrix->arrlen; i+=(CHUNK_SIZE - matrix->window_size + 1)*2)
+	
+	size_t offset = CHUNK_SIZE;
+	for (int i = 0; i < stream_cnt; ++i)
 	{
-		size_t data_size = (matrix->arrlen-i < CHUNK_SIZE) ? matrix->arrlen-i : CHUNK_SIZE;
+		size_t tmp = offset*i,
+			   data_size = (i < stream_cnt-1) ? CHUNK_SIZE : CHUNK_SIZE + matrix->arrlen % CHUNK_SIZE;
 
-		error = cudaMemcpyAsync(matrix->d_matrix+i, (matrix->h_matrix)+i, data_size*sizeof(double), cudaMemcpyHostToDevice, stream0);
+		printf("%d %d\n", tmp, data_size);
+		error = cudaMemcpyAsync(matrix->d_matrix+tmp, matrix->h_matrix+tmp, data_size*sizeof(double), cudaMemcpyHostToDevice, streams[i]);
 		checkCudaErrors(error);
-		error = cudaMemcpyAsync(matrix->d_matrix+i, (matrix->h_matrix)+i, data_size*sizeof(double), cudaMemcpyHostToDevice, stream0);
-		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, stream0>>>(matrix->d_matrix+i, matrix->d_minval+i, matrix->d_maxval+i, data_size, matrix->window_size);
-
-		//cuda_print_arr<<<1, 1, 0, stream0>>>(matrix->d_minval, matrix->arrlen);
 	}
-	cudaStreamSynchronize(stream0);
+
+	for (int i = 0; i < stream_cnt; ++i)
+	{
+		size_t tmp = offset*i,
+			   data_size = (i < stream_cnt-1) ? CHUNK_SIZE : CHUNK_SIZE + matrix->arrlen % CHUNK_SIZE;
+
+		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, streams[i]>>>(matrix->d_matrix+tmp, matrix->d_minval+tmp, matrix->d_maxval+tmp, data_size, matrix->window_size);
+	}
+
+
+	for (int i = 0; i < stream_cnt; ++i)
+		cudaStreamSynchronize(streams[i]);
+	//cuda_print_arr<<<1,1>>>(matrix->d_matrix, matrix->arrlen);
 
 	double time = GetTimer()/1000;
 	return time;

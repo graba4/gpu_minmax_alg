@@ -2,7 +2,7 @@
 #define RESOURCES_H
 #include "io.h"
 
-#define CHUNK_SIZE (4)
+#define CHUNK_SIZE (4000)
 
 
 typedef struct cuda_matrix

@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 		}
 		info.durations_cpu[info.run_nr] += min_max_cpu(matrix);
 		if(!verify(matrix))
-			printf("verification failed\n");
+			printf("ERROR: verification failed\n");
 
 		free_matrix(matrix);
 	}

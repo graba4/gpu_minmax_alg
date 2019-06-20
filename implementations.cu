@@ -133,7 +133,7 @@ double streams_approach(cuda_matrix *matrix) {
 	StartTimer();
 
 	size_t offset = CHUNK_SIZE - matrix->window_size + 1;
-	size_t stream_cnt = matrix->arrlen/offset;
+	size_t stream_cnt = ROUND_UP(matrix->arrlen, offset);
 	cudaStream_t streams[stream_cnt];
 	for(int i = 0; i < stream_cnt; ++i) {
 		error = cudaStreamCreate(&(streams[i]));
@@ -141,13 +141,12 @@ double streams_approach(cuda_matrix *matrix) {
 	}
 
 	//print_matrix(matrix->h_matrix, matrix->arrlen);
-	
 	for (int i = 0; i < stream_cnt; ++i)
 	{
 		size_t tmp = offset*i,
-			   data_size = (i < stream_cnt-1) ? CHUNK_SIZE : matrix->arrlen % CHUNK_SIZE;
+			   data_size = (matrix->arrlen - tmp > CHUNK_SIZE) ? CHUNK_SIZE : matrix->arrlen - tmp;
 
-		printf("%d %d\n", tmp, data_size);
+		//printf("%d %d\n", tmp, data_size);
 		error = cudaMemcpyAsync(matrix->d_matrix+tmp, matrix->h_matrix+tmp, data_size*sizeof(double), cudaMemcpyHostToDevice, streams[i]);
 		checkCudaErrors(error);
 		par_alg_inc_blocks<<<matrix->core_count, matrix->thread_count, 0, streams[i]>>>(matrix->d_matrix+tmp, matrix->d_minval+tmp, matrix->d_maxval+tmp, data_size, matrix->window_size);

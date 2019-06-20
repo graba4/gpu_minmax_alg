@@ -45,7 +45,7 @@ resources.o: resources.cu
 	$(NVCC) $(INCLUDES) -o $@ -c $<
 
 check:
-	./min_max -v 15 -w 3 -c 1 -i 3 -t 1
+	./min_max -v 150000 -w 4000 -c 2 -i 3 -t 100
 
 clean:
 	rm -f min_max *.o

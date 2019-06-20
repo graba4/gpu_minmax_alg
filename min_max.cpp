@@ -41,23 +41,15 @@ int main(int argc, char *argv[])
 				info.durations_gpu[info.run_nr] += cuda_parallel_approach(matrix);
 				break;
 
-			case 1: //cuda sequential
-				matrix = allocate_resources(&info, info.run_nr);
-				info.durations_gpu[info.run_nr] += sequential_approach(matrix);
-				break;
-
-			case 2: //thrust parallel
+			case 1: //thrust parallel
 				matrix = allocate_resources(&info, info.run_nr);
 				//printf("%.1f\n", thrust_approach(matrix));
 				info.durations_gpu[info.run_nr] += thrust_approach(matrix);
 				break;
 			
-			case 3: //not implemented
+			case 2: //not implemented
 				matrix = allocate_resources_streams(&info, info.run_nr);
 				info.durations_gpu[info.run_nr] += streams_approach(matrix);
-				break;
-
-			case 4:
 				break;
 
 			default:
